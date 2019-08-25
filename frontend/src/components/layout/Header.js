@@ -161,8 +161,8 @@ class Header extends Component {
                   open={this.state.open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleMenu} component={Link} to="/profile" >Profile</MenuItem>
-                  <MenuItem onClick={this.handleMenu} component={Link} to="/admin">Admin Panel</MenuItem>
+                  <MenuItem onClick={this.handleMenu} component={Link} to="/profile">Profile</MenuItem>
+                  <MenuItem onClick={this.handleMenu} component={Link} to="/admin">Admin Panel</MenuItem>  // not forget to do check in the server if auth - when url is clicket on the url bar
                 </Menu>
               </div>
             )}
