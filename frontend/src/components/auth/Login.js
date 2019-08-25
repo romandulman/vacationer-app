@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import CardActions from '@material-ui/core/CardActions';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import  '../../stylesheets/main.css'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
@@ -47,13 +47,9 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <Dialog
-                    open={this.props.showLogin}
-                    onClose={this.props.showLogin}
-                    aria-labelledby="form-dialog-title"
-                >
-                    <DialogTitle id="form-dialog-title">Add New Task</DialogTitle>
-                    <DialogContent>
+                <Card className="main">
+                    <CardContent>
+
                         <TextField
                             autoFocus
                             margin="dense"
@@ -76,16 +72,17 @@ class Login extends Component {
 
                             fullWidth
                         />
-                    </DialogContent>
-                    <DialogActions>
+                    </CardContent>
+                    <CardActions>
                         <Button onClick={this.handleView} color="primary">
                             Cancel
                         </Button>
                         <Button onClick={this.handleLogin} color="primary">
-                            Publish Comment
+                            Login
                         </Button>
-                    </DialogActions>
-                </Dialog>
+                    </CardActions>
+                </Card>
+
             </div>
         );
     }
