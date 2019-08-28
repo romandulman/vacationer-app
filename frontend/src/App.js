@@ -3,6 +3,8 @@ import Header from "./components/layout/Header";
 import Vecations from "./components/vacation-main/Vacations"
 import "./stylesheets/fonts.css"
 import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+
 import {
   BrowserRouter as Router,
   Route,
@@ -21,7 +23,7 @@ class App extends Component {
             </Route>
             <Route path="/allvications" component={Vecations} />
               <Route path="/login" component={Login} />
-
+            <Route path="/register" component={Register} />
           </Router>
 
         </div>
