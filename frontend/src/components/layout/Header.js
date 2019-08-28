@@ -74,9 +74,7 @@ class Header extends Component {
 
   };
 
-  addGuestHandler = () => {
-    this.props.isLoggedIn ? this.props.ShowModal() : this.props.LoginBtn();
-  };
+
 
   componentDidMount() {
     const handleErrors = response => {
@@ -134,7 +132,9 @@ class Header extends Component {
                 login
               </Button>
             )}
-            {!this.props.isLoggedIn && (
+            {!this.props.isLoggedIn &&   <Button color="primary">Login</Button>
+            }
+            {this.props.isLoggedIn && (
               <div>
                 <IconButton
                   aria-label="account of current user"
@@ -159,7 +159,7 @@ class Header extends Component {
                     horizontal: "right"
                   }}
                   open={this.state.open}
-                  onClose={this.handleClose}
+                  onClose={this.handleMenu}
                 >
                   <MenuItem onClick={this.handleMenu} component={Link} to="/profile">Profile</MenuItem>
                   <MenuItem onClick={this.handleMenu} component={Link} to="/admin">Admin Panel</MenuItem>  // not forget to do check in the server if auth - when url is clicket on the url bar

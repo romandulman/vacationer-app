@@ -1,5 +1,18 @@
 import React, { Component } from "react";
 import Item from "./Item";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import { connect } from "react-redux";
+
+
+const mapStateToProps = state => {
+    return {
+        VacData: state.VacData,
+    };
+};
+
+
 
 class Vecations extends Component {
     render() {
@@ -11,4 +24,4 @@ class Vecations extends Component {
     }
 }
 
-export default Vecations;
+export default connect(mapStateToProps)(Vecations);
