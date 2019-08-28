@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.isLoggedIn,
-        showLogin: state.showLogin
     };
 };
 
@@ -46,7 +45,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+             <div>
                 <Card className="main">
                     <CardContent>
 

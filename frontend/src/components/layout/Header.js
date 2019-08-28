@@ -56,7 +56,7 @@ const mapDispachToProps = dispach => {
     LoginConfirm: profile =>
       dispach({ type: "IsLoggedIn", UserProfile: profile }),
     LoginBtn: () => dispach({ type: "LOGIN" }),
-    ShowModal: () => dispach({ type: "SHOWMODAL" })
+    ShowLogin: () => dispach({ type: "SHOWLOGIN" })
   };
 };
 
@@ -132,7 +132,7 @@ class Header extends Component {
                 login
               </Button>
             )}
-            {!this.props.isLoggedIn &&   <Button color="primary">Login</Button>
+            {!this.props.isLoggedIn &&   <Button color="primary" component={Link} to ="/login">Login</Button>
             }
             {this.props.isLoggedIn && (
               <div>
