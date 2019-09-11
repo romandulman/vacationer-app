@@ -4,6 +4,7 @@ import Vecations from "./components/vacation-main/Vacations"
 import "./stylesheets/fonts.css"
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
+import { connect } from 'react-redux';
 
 import {
   BrowserRouter as Router,
@@ -31,4 +32,12 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  const { alert } = state;
+  return {
+    alert
+  };
+}
+
+const connectedApp = connect(mapStateToProps)(App);
+export { connectedApp as App };
