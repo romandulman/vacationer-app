@@ -16,7 +16,8 @@ import { Styles } from "./User.stylesheet";
 class UserLoginContainer extends Component {
   state = {
     Username: "",
-    Password: ""
+    Password: "",
+    submitted: false
   };
 
   handleLogin = e => {
@@ -26,9 +27,19 @@ class UserLoginContainer extends Component {
       Password: this.state.Password
     });*/
 
-    login(this.state.Username,this.state.Password);
+    this.setState({ submitted: true });
+    const { username, password } = this.state;
+    const { dispatch } = this.props;
+
+   // if (username && password) {
+      dispatch(login(username, password));
+    //}
+
+
     this.resetForm();
-    console.log(this.state.Password)
+
+    //login(this.state.Username,this.state.Password);
+   // console.log(this.state.Password)
   };
 
   resetForm = () => {
@@ -120,6 +131,7 @@ const mapStateToProps = state => {
 
 };
 
+/*
 const mapDispachToProps = dispach => {
     return {
         LoginConfirm: profile =>
@@ -127,8 +139,9 @@ const mapDispachToProps = dispach => {
         handleShowLogin: () => dispach({ type: "LOGIN" })
     };
 };
+*/
 
-const connectedUserLogin = connect(mapStateToProps,mapDispachToProps)(withStyles(Styles)(UserLoginContainer));
+const connectedUserLogin = connect(mapStateToProps)(withStyles(Styles)(UserLoginContainer));
 export { connectedUserLogin as UserLoginContainer };
 
 

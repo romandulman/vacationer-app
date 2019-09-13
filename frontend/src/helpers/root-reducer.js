@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
 
 //import { users } from './users.reducers';
-import  VacReducer from '../components/vacations';
-
+//import  VacReducer from '../components/vacations/Vacations.reducers';
+import  UserReducer  from '../components/user/User.reducers'
 
 const RootReducer = combineReducers({
    // users,
-    VacReducer
+   UserReducer
+    //VacReducer
 });
-
-export default RootReducer;
+ export  default RootReducer
+ //RootReducer;

@@ -20,24 +20,30 @@ class App extends Component {
     return (
         <div className="App">
           <Router>
-
+{this.props.b}
             <Header />
             <Route path="/">
               <Redirect to="/allvications" />
             </Route>
            <Route path="/login" component={ UserLogin } />
             <Route path="/register" component={ UserRegister } />
+
+            <br/>
+            <br/>
+        <br/>
+
+            <h1>{this.props.b}</h1>
+
           </Router>
         </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  const { alert } = state;
-  return {
-    alert
-  };
+const mapStateToProps = state => {
+    return {
+        b: state.data
+    }
 }
 
 const connectedApp = connect(mapStateToProps)(App);

@@ -15,6 +15,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import {styles} from './Header.stylesheet'
 import './Header.stylesheet.css'
 
+/*
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
@@ -22,6 +23,7 @@ const mapStateToProps = state => {
 
   };
 };
+*/
 
 const mapDispachToProps = dispach => {
   return {
@@ -115,5 +117,5 @@ class Header extends Component {
 
 
 
-const connectedHeader = connect(mapStateToProps,mapDispachToProps)(withStyles(styles)(Header));
+const connectedHeader = connect(mapDispachToProps)(withStyles(styles)(Header));
 export { connectedHeader as Header };

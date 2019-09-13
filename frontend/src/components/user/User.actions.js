@@ -13,8 +13,11 @@ import { history } from "../../helpers";
 
 
 export const  login  = (username, password) => {
-        return dispatch => {
-            dispatch(request({ username }));
+
+    return dispatch => {
+          //  dispatch({ type: UserConstants.LOGIN_REQUEST});
+
+          dispatch(request({ username }));
 
             UserLogin(username, password)
                 .then(
@@ -29,12 +32,11 @@ export const  login  = (username, password) => {
                     }
                 );
         };
-
-        const request = (user) => { return { type: UserConstants.LOGIN_REQUEST, user } }
-        const success = user => { return { type: UserConstants.LOGIN_SUCCESS, user } }
-        const failure = error => { return { type: UserConstants.LOGIN_FAILURE, error } }
-
+    
     }
+const request = user => { return { type: UserConstants.LOGIN_REQUEST, user } }
+const success = user => { return { type: UserConstants.LOGIN_SUCCESS, user } }
+const failure = error => { return { type: UserConstants.LOGIN_FAILURE, error } }
 
 
 

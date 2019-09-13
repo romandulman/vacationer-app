@@ -1,16 +1,21 @@
-// in reducer.js
 import {VacConstants} from './Vacations.constants'
 
 const initialState = {
-    Data: 'Royksopp'
+    Data: ''
 };
 
 export default (state=initialState, action={}) => {
     switch (action.type) {
-        case types.SEARCH:
+        case VacConstants.SHOW_ALL:
             return [
-alert()
+            alert("show all")
             ];
+        case VacConstants.ADD_VACATION:
+            return [
+                alert("ADD")
+            ];
+
+
         // ...
     }
 };
