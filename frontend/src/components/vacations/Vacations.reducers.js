@@ -1,8 +1,8 @@
 // in reducer.js
-import * as types from './Vacations.types';
+import {VacConstants} from './Vacations.constants'
 
 const initialState = {
-    text: 'Royksopp'
+    Data: 'Royksopp'
 };
 
 export default (state=initialState, action={}) => {

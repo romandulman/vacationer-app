@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import   {Header}  from '../../components/layout';
+import { Header }  from '../../components/layout';
 import { UserLogin , UserRegister } from '../../components/user'
+import { history } from '../../helpers';
+
 //import Vacations from '../../components/vacations'
 //import "./stylesheets/fonts.css"
 //import  {UserLoginCont}  from '../../components/user'

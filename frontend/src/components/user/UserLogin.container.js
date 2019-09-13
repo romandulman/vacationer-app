@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { userActions } from '../../actions';
-import {UserLogin,GoogleLogin}  from './User.services'
-import PropTypes from 'prop-types';
+import { login } from './User.actions';
+import {GoogleLogin}  from './User.services'
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -21,10 +21,12 @@ class UserLoginContainer extends Component {
 
   handleLogin = e => {
     e.preventDefault();
-    this.props.onCreateTask({
+    /*this.props.onCreateTask({
       Username: this.state.Username,
       Password: this.state.Password
-    });
+    });*/
+
+    login(this.state.Username,this.state.Password);
     this.resetForm();
     console.log(this.state.Password)
   };
@@ -50,6 +52,7 @@ class UserLoginContainer extends Component {
     }
   };
 
+
   render() {
     const { classes } = this.props;
     return (
@@ -69,7 +72,6 @@ class UserLoginContainer extends Component {
                 name="Username"
                 type="text"
                 onChange={e => {
-                  // this.userLogin.UserName = e.target.value;
                   this.onFieldChange(e);
                 }}
                 fullWidth
@@ -81,7 +83,6 @@ class UserLoginContainer extends Component {
                 name="Password"
                 type="password"
                 onChange={e => {
-                  //this.userLogin.Password = e.target.value;
                   this.onFieldChange(e);
                 }}
                 fullWidth
@@ -98,7 +99,7 @@ class UserLoginContainer extends Component {
           </form>
           <hr />
           <CardActions>
-            <Button onClick={this.GoogleLogin} color="primary">
+            <Button onClick={GoogleLogin} color="primary">
               Login WIth Google
             </Button>
             <Button component={Link} to="/register" color="primary">
