@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import Header from "./components/layout/Header";
-import Vecations from "./components/vacation-main/Vacations"
-import "./stylesheets/fonts.css"
-import Login from './components/auth/Login'
-import Register from './components/auth/Register'
+import   {Header}  from '../../components/layout';
+import { UserLogin , UserRegister } from '../../components/user'
+//import Vacations from '../../components/vacations'
+//import "./stylesheets/fonts.css"
+//import  {UserLoginCont}  from '../../components/user'
+//import Register from '../../components/user'
 import { connect } from 'react-redux';
 
 import {
@@ -22,11 +23,9 @@ class App extends Component {
             <Route path="/">
               <Redirect to="/allvications" />
             </Route>
-            <Route path="/allvications" component={Vecations} />
-              <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
+           <Route path="/login" component={ UserLogin } />
+            <Route path="/register" component={ UserRegister } />
           </Router>
-
         </div>
     );
   }
