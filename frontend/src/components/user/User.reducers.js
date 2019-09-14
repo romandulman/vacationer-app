@@ -1,10 +1,48 @@
 import {UserConstants} from './User.constants'
 
-const initialState = {
-    data: 'abc'
+let user = JSON.parse(localStorage.getItem('user')); ///jwt
+const initialState = user ? { loggedIn: true, user } : {};
+
+export default (state = initialState, action) => {
+    switch (action.type) {
+        case UserConstants.LOGIN_REQUEST:
+            return {
+                loggingIn: true,
+                user: action.user
+            };
+        case UserConstants.LOGIN_SUCCESS:
+            return {
+                loggedIn: true,
+                user: action.user
+            };
+        case UserConstants.LOGIN_FAILURE:
+            return {};
+        case UserConstants.LOGOUT:
+            return {
+                loggedIn: false,
+                user: null
+            }; //for testing purpose only
+        default:
+            return state
+    }
 }
 
- export default (state=initialState, action)=>{
+
+
+
+
+
+
+
+
+
+
+
+/*const initialState = {
+    data: 'abc'
+}*/
+
+/* export default (state=initialState, action)=>{
      let newState = {...state};
 
      switch (action.type) {
@@ -24,5 +62,5 @@ const initialState = {
 
         // ...
     }
-};
+};*/
 ////export default  UserReducer

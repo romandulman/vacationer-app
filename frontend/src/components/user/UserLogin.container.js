@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from './User.actions';
+import { UserLoginAction } from './User.actions';
 import {GoogleLogin}  from './User.services'
 
 import Button from '@material-ui/core/Button';
@@ -15,36 +15,27 @@ import { Styles } from "./User.stylesheet";
 
 class UserLoginContainer extends Component {
   state = {
-    Username: "",
-    Password: "",
+    username: "",
+    password: "",
     submitted: false
   };
 
   handleLogin = e => {
     e.preventDefault();
-    /*this.props.onCreateTask({
-      Username: this.state.Username,
-      Password: this.state.Password
-    });*/
-
     this.setState({ submitted: true });
     const { username, password } = this.state;
     const { dispatch } = this.props;
-
-   // if (username && password) {
-      dispatch(login(username, password));
-    //}
-
-
-    this.resetForm();
-
-    //login(this.state.Username,this.state.Password);
-   // console.log(this.state.Password)
+    if (username && password) {
+      dispatch(UserLoginAction(username, password));
+      this.resetForm();
+    } else {
+      !username ? alert("Username missing") : alert("Password missing");
+    }
   };
 
   resetForm = () => {
     this.setState({
-      UserName: "",
+      Username: "",
       Password: ""
     });
   };
@@ -63,14 +54,13 @@ class UserLoginContainer extends Component {
     }
   };
 
-
   render() {
     const { classes } = this.props;
     return (
       <div>
         <Card className={classes.LoginCard}>
           {" "}
-          <form className="tasklistform" onSubmit={this.handleLogin}>
+          <form onSubmit={this.handleLogin}>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 Login
@@ -80,7 +70,7 @@ class UserLoginContainer extends Component {
                 autoFocus
                 margin="dense"
                 label="Username"
-                name="Username"
+                name="username"
                 type="text"
                 onChange={e => {
                   this.onFieldChange(e);
@@ -91,7 +81,7 @@ class UserLoginContainer extends Component {
                 autoFocus
                 margin="dense"
                 label="Password"
-                name="Password"
+                name="password"
                 type="password"
                 onChange={e => {
                   this.onFieldChange(e);
@@ -111,7 +101,7 @@ class UserLoginContainer extends Component {
           <hr />
           <CardActions>
             <Button onClick={GoogleLogin} color="primary">
-              Login WIth Google
+              Login With Google
             </Button>
             <Button component={Link} to="/register" color="primary">
               Register

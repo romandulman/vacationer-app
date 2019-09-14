@@ -7,7 +7,14 @@ export const Styles = {
         top: '40%',
         left: '40%',
         boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-
     },
+    RegisterCard: {
+        width: '300px',
+        // height: '150px',
+        position: 'fixed',
+        top: '40%',
+        left: '40%',
+        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+    }
 
 };
