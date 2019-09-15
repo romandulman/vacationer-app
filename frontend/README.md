@@ -1,6 +1,8 @@
-### Build with:
+
 
 * React
 * Redux
-* Saga
+* Redux Thunk
 * Material Design
+
+* Structured by feature/module
