@@ -14,7 +14,7 @@ export const UserLoginAction = (username, password) => {
 
       error => {
         dispatch(failure(error));
-       // dispatch(alertActions.error(error));
+       //dispatch(alertActions.error(error));
       }
     );
   };
@@ -35,15 +35,13 @@ export const NamesCheck = (username) => {
 
 export const UserRegisterAction = (username,password,firstname,lastname) =>{
     UserRegister(username,password,firstname,lastname).then(user=>{
-
-
     })
-}
+};
 
 export const UserLogoutAction = () =>{
     UserLogout();
     return { type: UserConstants.LOGOUT };
-}
+};
 
 const request = user => {
   return { type: UserConstants.LOGIN_REQUEST, user };
@@ -56,5 +54,14 @@ const failure = error => {
 };
 
 
+const regRequest = user => {
+    return { type: UserConstants.REGISTER_REQUEST, user };
+};
+const regSuccess = user => {
+    return { type: UserConstants.REGISTER_SUCCESS, user };
+};
+const regFailure = error => {
+    return { type: UserConstants.REGISTER_FAILURE, error };
+};
 
 
