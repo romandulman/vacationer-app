@@ -25,7 +25,6 @@ class UserRegisterContainer extends Component {
     this.setState({ submitted: true });
     const { username, password, repassword, firstname, lastname } = this.state;
     const { dispatch } = this.props;
-    
   };
 
   onFieldChange = e => {
