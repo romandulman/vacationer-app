@@ -1,9 +1,18 @@
 
 const model = require('../models');
 
- exports.getUser = (req,res) =>{
+ exports.userLogin = (req,res) =>{
 
-     res.send('fffff')
    // model.User.findOne()
+}
+
+exports.userLogout = (req,res) =>{
+
+    // model.User.findOne()
+}
+
+exports.userRegister = (req,res) =>{
+
+    // model.User.findOne()
 }
 

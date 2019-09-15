@@ -20,7 +20,7 @@ app.use(helmet());
 db.authenticate()
     .then(() => {
         console.log('Connection has been established successfully.');
-        db.sync()
+        //db.sync()
     })
     .catch(err => {
         console.error('Unable to connect to the database:', err);
