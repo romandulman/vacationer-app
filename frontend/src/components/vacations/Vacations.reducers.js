@@ -1,21 +1,29 @@
 import {VacConstants} from './Vacations.constants'
 
 const initialState = {
-    Data: ''
+   Data:''
 };
 
-export default (state=initialState, action={}) => {
+
+export default (state=initialState, action) => {
     switch (action.type) {
+
         case VacConstants.SHOW_ALL:
-            return [
-            alert("show all")
-            ];
-        case VacConstants.ADD_VACATION:
-            return [
-                alert("ADD")
-            ];
+
+         //state.vacData = action.vacData,
+              state.Data = action.vacData;
 
 
+
+        case VacConstants.SHOW_ONE:
+            return {
+                //state.vacData = action.vacData,
+                vacData: action.vacData
+
+            };
+        default:
+            return state
         // ...
     }
+
 };

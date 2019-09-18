@@ -3,28 +3,35 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import './Vacations.stylesheet.css'
-import  VacItemComponent  from './index';
+import  VacItemComponent  from './VacationsItem.component';
 import { connect } from 'react-redux'
-
+import {showAll} from './Vacations.actions'
 
 class Vacations extends Component {
+
+    componentDidMount() {
+        const { dispatch } = this.props;
+
+       dispatch(showAll())
+    }
+
     render() {
         return (
             <div className="vacations-list">
-                <div className="tasklisttitle">
-                    <strong>{this.props.status}</strong>
-                </div>
-                {this.props.vacations.map(item => (
+
+              {this.props.vacations.map(item => (
                     <VacItemComponent key={item.id} followerscount ={item.followerscount} description ={item.description} price={item.price} image = {item.image} datefrom={item.datefrom} dateto={item.dateto} />
                 ))}
+
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
+console.log(state.vacData)
     return {
-        tasks: state.tasks
+        vacations: state.data
     }
 }
 

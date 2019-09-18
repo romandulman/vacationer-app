@@ -2,7 +2,7 @@ import * as VacContainer from './Vacations.container'
 import VacReducer from './Vacations.reducers'
 import * as VacSaga from './Vacations.saga'
 import *  as VacService from './Vacations.services'
-import * as VacItemComponent from './VacationsItem.component'
 
+export { Vacations as VacItemComponent } from "./Vacations.container";
 
-export default { VacReducer, VacContainer, VacSaga, VacService, VacItemComponent }
+export default { VacReducer, VacContainer, VacSaga, VacService}

@@ -5,7 +5,7 @@ const adminCheck = require('../middlewares/adminSection');
 
 vacationsRouter.get('/',vacationsController.getAllVacations);
 
-vacationsRouter.post('/',adminCheck, vacationsController.newVacation);
+vacationsRouter.post("/",adminCheck, vacationsController.newVacation);
 
 vacationsRouter.delete('/',adminCheck, vacationsController.deleteVacation);
 

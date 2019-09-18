@@ -3,7 +3,7 @@ import { Header }  from '../../components/layout';
 import { UserLogin , UserRegister } from '../../components/user'
 import { history } from '../../helpers';
 
-//import Vacations from '../../components/vacations'
+import {VacItemComponent} from '../../components/vacations'
 //import "./stylesheets/fonts.css"
 //import  {UserLoginCont}  from '../../components/user'
 //import Register from '../../components/user'
@@ -20,19 +20,19 @@ class App extends Component {
     return (
         <div className="App">
           <Router>
-{this.props.b}
+
             <Header />
             <Route path="/">
-              <Redirect to="/allvications" />
+              <Redirect to="/allvacations" />
             </Route>
-           <Route path="/login" component={ UserLogin } />
+              <Route path="/allvacations" component={ VacItemComponent } />
+              <Route path="/login" component={ UserLogin } />
             <Route path="/register" component={ UserRegister } />
 
             <br/>
             <br/>
         <br/>
 
-            <h1>{this.props.b}</h1>
 
           </Router>
         </div>

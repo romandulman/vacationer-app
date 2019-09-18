@@ -1,17 +1,19 @@
-import {UserLogout} from "../user/User.services";
 
-export const GetAllVecations = () =>{
-    return fetch("/vacations/all")
+export const GetAllVecations = (a) =>{
+
+    return fetch("/vacations")
            .then(handleResponse)
 };
 
 const handleResponse = response =>{
+
     return response.json().then(text => {
         const data = text;
         if (!response.ok) {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
+
         return data;
     });
 };

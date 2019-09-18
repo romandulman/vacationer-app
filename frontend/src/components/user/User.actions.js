@@ -4,8 +4,7 @@ import { history } from "../../helpers";
 
 export const UserLoginAction = (username, password) => {
   return dispatch => {
-    dispatch(request({ username }));
-
+    //dispatch(request({ username }));
     UserLogin(username, password).then(
       user => {
         dispatch(success(user));
