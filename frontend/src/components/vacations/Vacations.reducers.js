@@ -1,26 +1,32 @@
 import {VacConstants} from './Vacations.constants'
 
 const initialState = {
-   Data:''
+   vacData:[],
+   loading: false,
+   error: null
 };
 
 
 export default (state=initialState, action) => {
     switch (action.type) {
-
-        case VacConstants.SHOW_ALL:
-
-         //state.vacData = action.vacData,
-              state.Data = action.vacData;
-
-
-
-        case VacConstants.SHOW_ONE:
+        case VacConstants.REQUEST_ALL:
+        return {
+            ...state,
+            loading: true
+        };
+        case VacConstants.SUCCESS_ALL:
             return {
-                //state.vacData = action.vacData,
-                vacData: action.vacData
-
+                ...state,
+                vacData: action.payload.vacData,
+                loading: false
             };
+
+        case VacConstants.FAILURE_ALL:
+           return {
+               ...state,
+               loading: false,
+               
+           };
         default:
             return state
         // ...

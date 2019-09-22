@@ -1,7 +1,13 @@
-
+import authHeader from '../../helpers/authHeader'
 export const GetAllVecations = (a) =>{
 
-    return fetch("/vacations")
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+
+    return fetch("/vacations",requestOptions)
            .then(handleResponse)
 };
 
@@ -13,7 +19,6 @@ const handleResponse = response =>{
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-
         return data;
     });
 };

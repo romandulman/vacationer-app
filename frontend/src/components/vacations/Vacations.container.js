@@ -6,20 +6,25 @@ import './Vacations.stylesheet.css'
 import  VacItemComponent  from './VacationsItem.component';
 import { connect } from 'react-redux'
 import {showAll} from './Vacations.actions'
+import { Styles } from "./Vacations.stylesheet.js";
+import {withStyles} from "@material-ui/core";
 
 class Vacations extends Component {
 
     componentDidMount() {
-        const { dispatch } = this.props;
-
+        const { dispatch} = this.props;
        dispatch(showAll())
     }
 
     render() {
-        return (
-            <div className="vacations-list">
+        const {vacations } = this.props;
+        const { classes } = this.props;
 
-              {this.props.vacations.map(item => (
+        return (
+            <div className={classes.rootDiv}>
+
+
+              {vacations && vacations.map(item => (
                     <VacItemComponent key={item.id} followerscount ={item.followerscount} description ={item.description} price={item.price} image = {item.image} datefrom={item.datefrom} dateto={item.dateto} />
                 ))}
 
@@ -29,12 +34,12 @@ class Vacations extends Component {
 }
 
 function mapStateToProps(state) {
-console.log(state.vacData)
+console.log( state.VacReducer.vacData);
     return {
-        vacations: state.data
+        vacations: state.VacReducer.vacData
     }
 }
 
 
-const connectedVecations = connect(mapStateToProps)(Vacations);
+const connectedVecations = connect(mapStateToProps)(withStyles(Styles)(Vacations));
 export { connectedVecations as Vacations };

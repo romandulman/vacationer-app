@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
             };
         case UserConstants.LOGIN_SUCCESS:
             return {
-                loggedIn: true,
+                loggedIn: false,
                 user: action.user
             };
         case UserConstants.LOGIN_FAILURE:
@@ -21,7 +21,8 @@ export default (state = initialState, action) => {
             return {
                 loggedIn: false,
                 user: null
-            }; //for testing purpose only
+            };
+
         default:
             return state
     }

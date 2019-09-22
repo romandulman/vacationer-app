@@ -22,6 +22,10 @@ class App extends Component {
           <Router>
 
             <Header />
+              <br/>
+              <br/>
+              <br/>
+              <br/>
             <Route path="/">
               <Redirect to="/allvacations" />
             </Route>

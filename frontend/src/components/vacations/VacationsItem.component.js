@@ -13,7 +13,7 @@ const VacationItem = props => {
             <Card className="item-card">
                 <CardContent>
                     <Typography className="item-description" color="textSecondary" gutterBottom>
-                        Followers {this.props.followerscount}
+                        Followers {props.followerscount}
                     </Typography>
                     <CardActions>
                         <Button size="small">Edit</Button>
@@ -21,16 +21,16 @@ const VacationItem = props => {
 
                     </CardActions>
                     <Typography className="item-description" color="textSecondary" gutterBottom>
-                        D: {this.props.description}
+                        D: {props.description}
                     </Typography>
                     <Typography className="item-price" color="textSecondary" gutterBottom>
-                        {this.props.price} $
+                        {props.price} $
                     </Typography>
 
-                    <img src={this.props.images} className='item-image'/>
+                    <img src={props.images} className='item-image'/>
 
                     <Typography className="item-dates" color="textSecondary" gutterBottom>
-                        {this.props.datefrom} To {this.props.dateto}
+                        {props.datefrom} To {props.dateto}
                     </Typography>
 
                 </CardContent>
