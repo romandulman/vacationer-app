@@ -10,6 +10,8 @@ const cors = require('cors');
 const router = require('./routes/index');
 const db = require('./models').sequelize;
 const helmet = require('helmet');
+const passport = require('passport');
+require('./config/passport.config');
 
 const app = express();
 app.use(cors());

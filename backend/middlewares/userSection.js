@@ -7,7 +7,8 @@
     } else {
        next();
     }
-}
+};
+
  module.exports = adminCheck;
 
 
