@@ -117,5 +117,4 @@ class Header extends Component {
 
 
 
-const connectedHeader = connect(mapDispachToProps)(withStyles(styles)(Header));
-export { connectedHeader as Header };
+export default   connect(mapDispachToProps)(withStyles(styles)(Header));

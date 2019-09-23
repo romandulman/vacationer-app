@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { Header }  from '../../components/layout';
-import { UserLogin , UserRegister } from '../../components/user'
+import { Header }  from '../../main';
+import { UserLogin , UserRegister } from '../../features'
 import { history } from '../../helpers';
-
-import {VacItemComponent} from '../../components/vacations'
+import {VacItemComponent} from '../../features'
 //import "./stylesheets/fonts.css"
 //import  {UserLoginCont}  from '../../components/user'
 //import Register from '../../components/user'
 import { connect } from 'react-redux';
-
 import {
   BrowserRouter as Router,
   Route,
@@ -50,5 +48,4 @@ const mapStateToProps = state => {
     }
 }
 
-const connectedApp = connect(mapStateToProps)(App);
-export { connectedApp as App };
+export default connect(mapStateToProps)(App);
