@@ -6,6 +6,8 @@
 
 #### Features:
 
+* MVC Architecture
+* Modular structure, by feature
 * Backend:
    * Node.js + Express
    * MySQL DB
@@ -13,4 +15,6 @@
    * Sequalize as MySQl ORM
    * Socket.io for live updates
 
-* Frontend:   
+* Frontend:
+  * React.js
+  * State management with  Redux + Thunk   
