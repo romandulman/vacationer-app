@@ -7,7 +7,7 @@
 #### Features:
 
 * MVC Architecture
-* Modular structure, by feature
+* Modular structure, arranged by feature
 * Backend:
    * Node.js + Express
    * MySQL DB
