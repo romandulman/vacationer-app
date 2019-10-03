@@ -1,38 +1,20 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import logoIco from '../../assets/images/departure.png';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Tooltip from '@material-ui/core/Tooltip';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import {styles} from './Header.stylesheet'
-import './Header.stylesheet.css'
-
-/*
-const mapStateToProps = state => {
-  return {
-    isLoggedIn: state.isLoggedIn,
-    UserProfile: state.UserProfile
-
-  };
-};
-*/
-
-const mapDispachToProps = dispach => {
-  return {
-    LoginConfirm: profile =>
-      dispach({ type: "IsLoggedIn", UserProfile: profile }),
-    LoginBtn: () => dispach({ type: "LOGIN" }),
-    ShowLogin: () => dispach({ type: "SHOWLOGIN" })
-  };
-};
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import logoIco from "./assets/images/departure.png";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import { styles } from "./assets/stylesheets/Header.stylesheet";
+import "./assets/stylesheets/header.stylesheet.css";
+import { UserLogoutAction } from "../../../features";
 
 class Header extends Component {
   state = {
@@ -40,17 +22,16 @@ class Header extends Component {
     open: ""
   };
 
-
   handleMenu = () => {
-      (this.state.open) ? this.setState({ open: false }):  this.setState({ open: true });
+    this.state.open
+      ? this.setState({ open: false })
+      : this.setState({ open: true });
   };
 
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   render() {
-    const { classes } = this.props;
+    const { classes, loggedIn, dispatch } = this.props;
     const { anchorEl } = this.state;
     return (
       <div>
@@ -66,18 +47,17 @@ class Header extends Component {
               <span className={classes.logoText}>Vecationer</span>
             </div>
 
-            {this.props.isLoggedIn && (
-              <Button
-                component={Link}
-                to="/contact"
-              >
-                login
+            {!loggedIn && (
+              <Button component={Link} to="/login">
+                Login
               </Button>
             )}
-            {!this.props.isLoggedIn &&   <Button color="primary" component={Link} to ="/login">Login</Button>
-            }
-            {this.props.isLoggedIn && (
+
+            {loggedIn && (
               <div>
+                <Button component={Link} to="/allvacations">
+                  Vacations
+                </Button>
                 <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
@@ -103,11 +83,31 @@ class Header extends Component {
                   open={this.state.open}
                   onClose={this.handleMenu}
                 >
-                  <MenuItem onClick={this.handleMenu} component={Link} to="/profile">Profile</MenuItem>
-                  <MenuItem onClick={this.handleMenu} component={Link} to="/admin">Admin Panel</MenuItem>  // not forget to do check in the server if auth - when url is click on the url bar
+                  <MenuItem
+                    onClick={this.handleMenu}
+                    component={Link}
+                    to="/profile"
+                  >
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={this.handleMenu}
+                    component={Link}
+                    to="/admin"
+                  >
+                    Admin Panel
+                  </MenuItem>
+                  <MenuItem
+                      onClick={()=>{dispatch(UserLogoutAction())}}
+                  >
+                    Logout
+                  </MenuItem>
+
+
                 </Menu>
               </div>
             )}
+
           </Toolbar>
         </AppBar>
       </div>
@@ -115,6 +115,11 @@ class Header extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.UserReducer.loggedIn,
+    isAdmin: state.UserReducer.loggedIn
+  };
+};
 
-
-export default   connect(mapDispachToProps)(withStyles(styles)(Header));
+export default connect(mapStateToProps)(withStyles(styles)(Header));

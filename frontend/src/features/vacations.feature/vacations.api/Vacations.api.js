@@ -1,5 +1,6 @@
-import authHeader from '../../helpers/authHeader'
-export const GetAllVecations = (a) =>{
+import authHeader from '../../../helpers/authHeader'
+
+export const GetAllVecations = () =>{
 
     const requestOptions = {
         method: 'GET',

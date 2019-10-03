@@ -33,10 +33,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 
 //app.use('/vacations', route);
 app.use('/users', router.usersRouter);
-app.use('/vacations', router.vacationsRouter);
+app.use('/vacations',passport.authenticate('jwt', { session: false }), router.vacationsRouter);
 
 module.exports = app;

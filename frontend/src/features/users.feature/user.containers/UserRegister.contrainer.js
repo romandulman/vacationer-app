@@ -7,10 +7,10 @@ import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from "@material-ui/core/Button";
-import {Styles} from './User.stylesheet';
-import { NamesCheck, UserRegisterAction } from './User.actions';
+import {Styles} from '../user.assets/stylesheets/User.stylesheet';
+import { NamesCheck, UserRegisterAction } from '../user.redux/User.actions';
 
-class UserRegisterContainer extends Component {
+class UserRegister extends Component {
   state = {
     username: "",
     password: "",
@@ -145,5 +145,5 @@ const mapDispachToProps = dispach => {
     };
 };
 
-const connectedUserRegister = connect(mapStateToProps,mapDispachToProps)(withStyles(Styles)(UserRegisterContainer));
-export { connectedUserRegister as UserRegisterContainer };
+export default connect(mapStateToProps,mapDispachToProps)(withStyles(Styles)(UserRegister));
+

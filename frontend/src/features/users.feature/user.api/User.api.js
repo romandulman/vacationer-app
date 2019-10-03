@@ -1,4 +1,3 @@
-
 export const UserLogin = (username,password) => {
   const requestOptions = {
     method: "POST",
@@ -6,10 +5,10 @@ export const UserLogin = (username,password) => {
     body: JSON.stringify({ username, password })
   };
 
-  return fetch("/auth/login", requestOptions)
+  return fetch("/users/login", requestOptions)
     .then(handleResponse)
     .then(user => {
-      localStorage.setItem("VacUserToken", JSON.stringify(user.token)); // user.token for the jwt
+      localStorage.setItem("vacationerToken", JSON.stringify(user)); // user.token for the jwt
       return user; /// all User object with profile etc..
     });
 };
@@ -20,7 +19,8 @@ export const UserLogin = (username,password) => {
 
 export const UserLogout = () => {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    localStorage.removeItem('vacationerToken');
+
 };
 
 export const UserRegister = (username,password,firstname,lastname) =>{
@@ -29,7 +29,7 @@ export const UserRegister = (username,password,firstname,lastname) =>{
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username,password,firstname,lastname })
     };
-    return fetch("/auth/register", requestOptions)
+    return fetch("/users/register", requestOptions)
         .then(handleResponse)
         .then(user => {
             localStorage.setItem("VacUserToken", JSON.stringify(user.token)); // user.token for the jwt

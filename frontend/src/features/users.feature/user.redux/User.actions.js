@@ -1,14 +1,21 @@
 import { UserConstants } from "./User.constants";
-import { UserLogin, GoogleLogin, UserLogout, CheckUsernames, UserRegister } from "./User.services";
-import { history } from "../../helpers";
+import { UserLogin, GoogleLogin, UserLogout, CheckUsernames, UserRegister } from "../user.api/User.api";
+//import { history } from "../../../helpers";
+//import { withRouter } from "react-router-dom"
+import { createBrowserHistory } from 'history';
+
+export const history = createBrowserHistory();
 
 export const UserLoginAction = (username, password) => {
-  return dispatch => {
-    //dispatch(request({ username }));
+  //
+
+    return dispatch => {
+
+    dispatch(request({ username }));
     UserLogin(username, password).then(
       user => {
         dispatch(success(user));
-        history.push("/");
+     //history.push("/allvacations");
       },
 
       error => {
@@ -39,7 +46,9 @@ export const UserRegisterAction = (username,password,firstname,lastname) =>{
 
 export const UserLogoutAction = () =>{
     UserLogout();
+    history.push("/login");
     return { type: UserConstants.LOGOUT };
+
 };
 
 const request = user => {

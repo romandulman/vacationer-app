@@ -1,4 +1,4 @@
-import '../../assets/stylesheets/fonts.css'
+import '../../../../main/common/assets/stylesheets/fonts.css'
 
 export const Styles = {
     LoginCard: {

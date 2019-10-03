@@ -7,7 +7,7 @@ const initialState = {
 };
 
 
-export default (state=initialState, action) => {
+export const VacationsReducer =  (state=initialState, action) => {
     switch (action.type) {
         case VacConstants.REQUEST_ALL:
         return {
@@ -25,7 +25,7 @@ export default (state=initialState, action) => {
            return {
                ...state,
                loading: false,
-               
+
            };
         default:
             return state

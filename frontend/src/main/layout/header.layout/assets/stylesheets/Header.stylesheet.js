@@ -1,4 +1,4 @@
-import '../../assets/stylesheets/fonts.css'
+import '../../../../common/assets/stylesheets/fonts.css'
 export const styles = {
     main: {
         backgroundColor: "#fff",

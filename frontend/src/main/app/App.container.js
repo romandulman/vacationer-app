@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Header }  from '../../main';
-import { UserLogin , UserRegister } from '../../features'
-import { history } from '../../helpers';
-import {VacItemComponent} from '../../features'
+import  Header  from '../layout/header.layout/Header.container';
+import {VacContainer, UserLogin , UserRegister } from '../../features'
+import {PrivateRoute} from '../common/private-route.common/PrivateRoute'
+//import { history } from '../../helpers';
 //import "./stylesheets/fonts.css"
-//import  {UserLoginCont}  from '../../components/user'
+
 //import Register from '../../components/user'
 import { connect } from 'react-redux';
 import {
@@ -24,10 +24,13 @@ class App extends Component {
               <br/>
               <br/>
               <br/>
-            <Route path="/">
+            <PrivateRoute exact path="/">
               <Redirect to="/allvacations" />
-            </Route>
-              <Route path="/allvacations" component={ VacItemComponent } />
+            </PrivateRoute >
+
+              <PrivateRoute exact path="/allvacations" component={VacContainer} />
+
+             {/* <Route path="/allvacations" component={ VacContainer } />*/}
               <Route path="/login" component={ UserLogin } />
             <Route path="/register" component={ UserRegister } />
 

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import  VacReducer from '../features';
-import  UserReducer  from '../features'
+import  {VacationsReducer} from '../features';
+import  {UserReducer}  from '../features'
 
 const RootReducer = combineReducers({
    UserReducer,
-   VacReducer
+   VacationsReducer
 });
 export  default  RootReducer

@@ -2,23 +2,28 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { UserLoginAction } from './User.actions';
-import {GoogleLogin}  from './User.services'
-
+import {GoogleLogin}  from '../user.api/User.api'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { Styles } from "./User.stylesheet";
+import { Styles } from "../user.assets/stylesheets/User.stylesheet";
+import {UserLoginAction} from "../user.redux/User.actions";
+import {UserLogoutAction} from "../user.redux/User.actions";
 
-class UserLoginContainer extends Component {
+class UserLogin extends Component {
   state = {
     username: "",
     password: "",
     submitted: false
   };
+
+  componentDidMount() {
+    const {dispatch} = this.props;
+    //dispatch(UserLogoutAction)
+  }
 
   handleLogin = e => {
     e.preventDefault();
@@ -131,7 +136,6 @@ const mapDispachToProps = dispach => {
 };
 */
 
-const connectedUserLogin = connect(mapStateToProps)(withStyles(Styles)(UserLoginContainer));
-export { connectedUserLogin as UserLoginContainer };
+export default connect(mapStateToProps)(withStyles(Styles)(UserLogin));
 
 
