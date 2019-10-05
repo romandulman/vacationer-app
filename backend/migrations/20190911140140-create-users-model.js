@@ -23,6 +23,10 @@ module.exports = {
       googleid: {
         type: Sequelize.STRING
       },
+      role: {
+        type: Sequelize.INTEGER
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -31,6 +35,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+
     });
   },
   down: (queryInterface, Sequelize) => {

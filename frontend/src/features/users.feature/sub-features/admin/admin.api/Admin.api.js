@@ -1,21 +1,18 @@
-import authHeader from '../../../helpers/authHeader'
+import authHeader from '../../../../../helpers/authHeader'
 
-export const GetAllVecations = () =>{
-
+export const GetVacationToEdit = (vacId) =>{
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
 
-
-    return fetch("/vacations",requestOptions)
-           .then(handleResponse)
+    return fetch(`/vacations/${vacId}`,requestOptions)
+        .then(handleResponse)
 };
 
 
 
 const handleResponse = response =>{
-
     return response.json().then(text => {
         const data = text;
         if (!response.ok) {

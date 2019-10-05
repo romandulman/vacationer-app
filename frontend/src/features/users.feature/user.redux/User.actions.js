@@ -2,9 +2,9 @@ import { UserConstants } from "./User.constants";
 import { UserLogin, GoogleLogin, UserLogout, CheckUsernames, UserRegister } from "../user.api/User.api";
 //import { history } from "../../../helpers";
 //import { withRouter } from "react-router-dom"
-import { createBrowserHistory } from 'history';
+//import { createBrowserHistory } from 'history';
 
-export const history = createBrowserHistory();
+//export const history = createBrowserHistory();
 
 export const UserLoginAction = (username, password) => {
   //
@@ -14,6 +14,7 @@ export const UserLoginAction = (username, password) => {
     dispatch(request({ username }));
     UserLogin(username, password).then(
       user => {
+          console.log(user)
         dispatch(success(user));
      //history.push("/allvacations");
       },
@@ -46,7 +47,7 @@ export const UserRegisterAction = (username,password,firstname,lastname) =>{
 
 export const UserLogoutAction = () =>{
     UserLogout();
-    history.push("/login");
+   // history.push("/login");
     return { type: UserConstants.LOGOUT };
 
 };

@@ -7,6 +7,7 @@ const passport = require('passport')
 require('../config/passport.config');
 
 vacationsRouter.get('/', vacationsController.getAllVacations);//userCheck,vacationsController.getAllVacations);
+vacationsRouter.get('/:id', vacationsController.getSingleVacation);//userCheck,vacationsController.getAllVacations);
 
 vacationsRouter.post("/",adminCheck, vacationsController.newVacation);
 

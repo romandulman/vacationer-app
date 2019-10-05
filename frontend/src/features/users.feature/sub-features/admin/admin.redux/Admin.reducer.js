@@ -1,10 +1,11 @@
 import {adminConstants} from "./Admin.constants";
 
-
-export const AdminReducer = (state={},action) =>{
+const initialState = {
+    showReports: false
+}
+export const AdminReducer = (state=initialState,action) =>{
     switch (action.type) {
         case adminConstants.ADD_VAC:
-
             return{
 
             };
@@ -20,9 +21,12 @@ export const AdminReducer = (state={},action) =>{
 
         case  adminConstants.FETCH_REPORTS:
             return{
-
+            showReports: action.data
             };
+        default:
+            return state;
     }
+    
 
 
 

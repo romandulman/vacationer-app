@@ -31,6 +31,7 @@ const jwtSecret = require("../config/jwt-config");
        auth: true,
        token,
        message: 'user found & logged in',
+       profile: user
       });
      });
     });

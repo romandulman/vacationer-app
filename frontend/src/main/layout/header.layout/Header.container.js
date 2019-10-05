@@ -31,7 +31,7 @@ class Header extends Component {
   componentDidMount() {}
 
   render() {
-    const { classes, loggedIn, dispatch } = this.props;
+    const { classes, loggedIn, dispatch, isAdmin } = this.props;
     const { anchorEl } = this.state;
 
     return (
@@ -91,13 +91,15 @@ class Header extends Component {
                   >
                     Profile
                   </MenuItem>
-                  <MenuItem
+
+              { isAdmin   &&  <MenuItem
                     onClick={this.handleMenu}
                     component={Link}
                     to="/admin"
                   >
                     Admin Panel
-                  </MenuItem>
+                  </MenuItem> }
+
                   <MenuItem
                       onClick={()=>{dispatch(UserLogoutAction())}}
                   >
@@ -119,7 +121,7 @@ class Header extends Component {
 const mapStateToProps = state => {
   return {
     loggedIn: state.UserReducer.loggedIn,
-    isAdmin: state.UserReducer.loggedIn
+    isAdmin: state.UserReducer.isAdmin
   };
 };
 

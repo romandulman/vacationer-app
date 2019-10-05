@@ -1,36 +1,47 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React,{Component} from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import '../vacations.assets/stylesheets/Vacations.stylesheet.css'
+import DeleteIcon from '@material-ui/icons/Delete';
+import {connect} from 'react-redux'
 
-const VacationItem = props => {
+import {Styles} from '../vacations.assets/stylesheets/Vacations.stylesheet'
+
+class VacationItem extends Component {
+
+    render() {
+    const {isEditable} = this.props;
+
     return (
         <div className="vacation-item">
             <Card className="item-card">
+                <div>
+
+                </div>
                 <CardContent>
                     <Typography className="item-description" color="textSecondary" gutterBottom>
-                        Followers {props.followerscount}
+                        Followers {this.props.followerscount}
                     </Typography>
-                    <CardActions>
+              { isEditable &&     <CardActions>
                         <Button size="small">Edit</Button>
                         <Button size="small">Delete</Button>
 
-                    </CardActions>
+                    </CardActions>}
                     <Typography className="item-description" color="textSecondary" gutterBottom>
-                        D: {props.description}
+                        D: {this.props.description}
                     </Typography>
                     <Typography className="item-price" color="textSecondary" gutterBottom>
-                        {props.price} $
+                        {this.props.price} $
                     </Typography>
 
-                    <img src={props.images} className='item-image'/>
+                    <img src={this.props.images} className='item-image'/>
 
                     <Typography className="item-dates" color="textSecondary" gutterBottom>
-                        {props.datefrom} To {props.dateto}
+                        {this.props.datefrom} To {this.props.dateto}
                     </Typography>
 
                 </CardContent>
@@ -40,6 +51,15 @@ const VacationItem = props => {
             </Card>
         </div>
     )
+    }
 }
-export default VacationItem
+
+function mapStateToProps(state) {
+    return {
+        isEditable: state.AdminReducer.isEditable
+    };
+}
+
+
+export default connect(mapStateToProps)(withStyles(Styles)(VacationItem));
 
