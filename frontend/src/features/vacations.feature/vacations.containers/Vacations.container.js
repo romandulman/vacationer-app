@@ -17,8 +17,10 @@ class Vacations extends Component {
 
   render() {
     const { vacations } = this.props;
-    const { classes } = this.props;
-
+    const { classes,loggedIn } = this.props;
+    if(!loggedIn){
+      this.props.history.push('/login')
+    }
     return (
       <div className={classes.rootDiv}>
         {vacations &&
@@ -41,6 +43,7 @@ class Vacations extends Component {
 function mapStateToProps(state) {
   console.log(state.VacationsReducer.vacData);
   return {
+    loggedIn: state.UserReducer.loggedIn,
     vacations: state.VacationsReducer.vacData
   };
 }

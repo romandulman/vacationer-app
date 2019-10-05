@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { Styles } from "../user.assets/stylesheets/User.stylesheet";
 import {UserLoginAction} from "../user.redux/User.actions";
 import {UserLogoutAction} from "../user.redux/User.actions";
+import {isLabeledStatement} from "@babel/types";
 
 class UserLogin extends Component {
   state = {
@@ -60,7 +61,11 @@ class UserLogin extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes ,loggedIn} = this.props;
+    if(loggedIn){
+      this.props.history.push('/allvacations')
+    }
+
     return (
       <div>
         <Card className={classes.LoginCard}>
@@ -121,7 +126,7 @@ class UserLogin extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.isLoggedIn,
+      loggedIn: state.UserReducer.loggedIn,
     };
 
 };

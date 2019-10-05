@@ -33,6 +33,7 @@ class Header extends Component {
   render() {
     const { classes, loggedIn, dispatch } = this.props;
     const { anchorEl } = this.state;
+
     return (
       <div>
         <AppBar position="static" className={classes.main}>
