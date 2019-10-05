@@ -10,20 +10,50 @@ export const openEditVac = id =>{
              dispatch(sucFetchEdit(vacation))
          },
          error =>{
-             
+             dispatch(failFetchEdit(error))
          }
      )
     }
-}
+};
+
+export const submitEditVac = data =>{
+    return dispatch =>{
+        dispatch(reqSubmitEdit())
+        PostVacationToEdit(data).then(
+            response=>{
+                dispatch(sucSubmitEdit(response))
+            },
+            error =>{
+                dispatch(failSubmitEdit(error))
+            }
+        )
+    }
+};
 
 
 
- const reqFetchEdit = () =>({
+const reqFetchEdit = () =>({
      type:adminConstants.REQUEST_FETCH_FOR_EDIT
  });
 const sucFetchEdit = (vacation) =>({
     type:adminConstants.SUCCESS_FETCH_FOR_EDIT , vacation
 });
+const failFetchEdit = (error) =>({
+    type:adminConstants.FAILURE_FETCH_FOR_EDIT , error
+});
+
+
+
+const reqSubmitEdit = () =>({
+    type:adminConstants.REQUEST_SUBMIT_FOR_EDIT
+});
+const sucSubmitEdit = (vacation) =>({
+    type:adminConstants.SUCCESS_SUBMIT_FOR_EDIT , vacation
+});
+const failSubmitEdit = (error) =>({
+    type:adminConstants.FAILURE_SUBMIT_FOR_EDIT , error
+});
+
 
 
 
