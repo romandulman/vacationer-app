@@ -1,33 +1,38 @@
-import {adminConstants} from "./Admin.constants";
+import { adminConstants } from "./Admin.constants";
 
 const initialState = {
-    showReports: false
-}
-export const AdminReducer = (state=initialState,action) =>{
-    switch (action.type) {
-        case adminConstants.ADD_VAC:
-            return{
+  showReports: false,
+  showVacEdit: false
+};
 
-            };
-        case adminConstants.EDIT_VAC:
+export const AdminReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case adminConstants.MAKE_VAC_EDITABLE:
+      return {
+        isEditable: true
+      };
 
-            return{
+    case adminConstants.REQUEST_FETCH_FOR_EDIT:
+      return {};
 
-            };
-        case  adminConstants.DELETE_VAC:
-            return{
+    case adminConstants.SUCCESS_FETCH_FOR_EDIT:
+      return {};
 
-            };
+    case adminConstants.FAILURE_FETCH_FOR_EDIT:
+      return {};
 
-        case  adminConstants.FETCH_REPORTS:
-            return{
-            showReports: action.data
-            };
-        default:
-            return state;
-    }
-    
+    case adminConstants.ADD_VAC:
+      return {};
+    case adminConstants.EDIT_VAC:
+      return {};
+    case adminConstants.DELETE_VAC:
+      return {};
 
-
-
-}
+    case adminConstants.FETCH_REPORTS:
+      return {
+        showReports: action.data
+      };
+    default:
+      return state;
+  }
+};

@@ -17,9 +17,9 @@ class Vacations extends Component {
 
   render() {
     const { vacations } = this.props;
-    const { classes,loggedIn } = this.props;
-    if(!loggedIn){
-      this.props.history.push('/login')
+    const { classes, loggedIn } = this.props;
+    if (!loggedIn) {
+      this.props.history.push("/login");
     }
     return (
       <div className={classes.rootDiv}>

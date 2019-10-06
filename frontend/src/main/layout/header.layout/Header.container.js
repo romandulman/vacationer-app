@@ -92,25 +92,26 @@ class Header extends Component {
                     Profile
                   </MenuItem>
 
-              { isAdmin   &&  <MenuItem
-                    onClick={this.handleMenu}
-                    component={Link}
-                    to="/admin"
-                  >
-                    Admin Panel
-                  </MenuItem> }
+                  {isAdmin && (
+                    <MenuItem
+                      onClick={this.handleMenu}
+                      component={Link}
+                      to="/admin"
+                    >
+                      Admin Panel
+                    </MenuItem>
+                  )}
 
                   <MenuItem
-                      onClick={()=>{dispatch(UserLogoutAction())}}
+                    onClick={() => {
+                      dispatch(UserLogoutAction());
+                    }}
                   >
                     Logout
                   </MenuItem>
-
-
                 </Menu>
               </div>
             )}
-
           </Toolbar>
         </AppBar>
       </div>

@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import {GoogleLogin}  from '../user.api/User.api'
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { GoogleLogin } from "../user.api/User.api";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import CardActions from "@material-ui/core/CardActions";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import { Styles } from "../user.assets/stylesheets/User.stylesheet";
-import {UserLoginAction} from "../user.redux/User.actions";
-import {UserLogoutAction} from "../user.redux/User.actions";
-import {isLabeledStatement} from "@babel/types";
+import { UserLoginAction } from "../user.redux/User.actions";
+import { UserLogoutAction } from "../user.redux/User.actions";
+import { isLabeledStatement } from "@babel/types";
 
 class UserLogin extends Component {
   state = {
@@ -22,7 +22,7 @@ class UserLogin extends Component {
   };
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     //dispatch(UserLogoutAction)
   }
 
@@ -61,9 +61,9 @@ class UserLogin extends Component {
   };
 
   render() {
-    const { classes ,loggedIn} = this.props;
-    if(loggedIn){
-      this.props.history.push('/allvacations')
+    const { classes, loggedIn } = this.props;
+    if (loggedIn) {
+      this.props.history.push("/allvacations");
     }
 
     return (
@@ -123,12 +123,10 @@ class UserLogin extends Component {
   }
 }
 
-
 const mapStateToProps = state => {
-    return {
-      loggedIn: state.UserReducer.loggedIn,
-    };
-
+  return {
+    loggedIn: state.UserReducer.loggedIn
+  };
 };
 
 /*
@@ -142,5 +140,3 @@ const mapDispachToProps = dispach => {
 */
 
 export default connect(mapStateToProps)(withStyles(Styles)(UserLogin));
-
-

@@ -1,36 +1,31 @@
-import authHeader from '../../../../../helpers/authHeader'
+import authHeader from "../../../../../helpers/authHeader";
 
-export const GetVacationToEdit = vacId =>{
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
+export const GetVacationToEdit = vacId => {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
 
-    return fetch(`/vacations/${vacId}`,requestOptions)
-        .then(handleResponse)
+  return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
 };
 
-export const PostVacationToEdit = (vacId,newVacData) =>{
-    const requestOptions = {
-        method: 'PUT',
-        headers: authHeader(),
-        body: JSON.stringify({ newVacData })
-    };
+export const PostVacationToEdit = (vacId, newVacData) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: authHeader(),
+    body: JSON.stringify({ newVacData })
+  };
 
-    return fetch(`/vacations/${vacId}`,requestOptions)
-        .then(handleResponse)
+  return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
+};
 
-
-}
-
-
-const handleResponse = response =>{
-    return response.json().then(text => {
-        const data = text;
-        if (!response.ok) {
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-        return data;
-    });
+const handleResponse = response => {
+  return response.json().then(text => {
+    const data = text;
+    if (!response.ok) {
+      const error = (data && data.message) || response.statusText;
+      return Promise.reject(error);
+    }
+    return data;
+  });
 };

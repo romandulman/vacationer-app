@@ -3,12 +3,12 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
-import CardActions from '@material-ui/core/CardActions';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import CardActions from "@material-ui/core/CardActions";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import {Styles} from '../user.assets/stylesheets/User.stylesheet';
-import { NamesCheck, UserRegisterAction } from '../user.redux/User.actions';
+import { Styles } from "../user.assets/stylesheets/User.stylesheet";
+import { NamesCheck, UserRegisterAction } from "../user.redux/User.actions";
 
 class UserRegister extends Component {
   state = {
@@ -132,18 +132,20 @@ class UserRegister extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        isLoggedIn: state.isLoggedIn,
-    };
+  return {
+    isLoggedIn: state.isLoggedIn
+  };
 };
 
 const mapDispachToProps = dispach => {
-    return {
-        LoginConfirm: profile =>
-            dispach({ type: "IsLoggedIn", UserProfile: profile }),
-        handleShowLogin: () => dispach({ type: "LOGIN" })
-    };
+  return {
+    LoginConfirm: profile =>
+      dispach({ type: "IsLoggedIn", UserProfile: profile }),
+    handleShowLogin: () => dispach({ type: "LOGIN" })
+  };
 };
 
-export default connect(mapStateToProps,mapDispachToProps)(withStyles(Styles)(UserRegister));
-
+export default connect(
+  mapStateToProps,
+  mapDispachToProps
+)(withStyles(Styles)(UserRegister));

@@ -3,17 +3,16 @@ import { GetAllVecations } from "../vacations.api/Vacations.api";
 
 export const showAll = () => dispatch => {
   GetAllVecations().then(
-      vacations => {
-    //dispatch(_showAll("k"));
-    dispatch(successAll(vacations));
+    vacations => {
+      //dispatch(_showAll("k"));
+      dispatch(successAll(vacations));
 
-    // history.push("/vacations");
-  },
+      // history.push("/vacations");
+    },
     error => {
-        //dispatch(failure(error));
-        //dispatch(alertActions.error(error));
+      //dispatch(failure(error));
+      //dispatch(alertActions.error(error));
     }
-
   );
 };
 
@@ -32,5 +31,6 @@ const successAll = vacData => ({
 });
 
 const _showOne = vacData => ({
-    type: VacConstants.SHOW_ONE, vacData
+  type: VacConstants.SHOW_ONE,
+  vacData
 });
