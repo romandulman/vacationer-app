@@ -4,6 +4,7 @@ import { GetVacationToEdit, PostVacationToEdit } from "../admin.api/Admin.api";
 export const openEditVac = id => {
   return dispatch => {
     dispatch(reqFetchEdit());
+    console.log(id)
     GetVacationToEdit(id).then(
       vacation => {
         dispatch(sucFetchEdit(vacation));
@@ -45,6 +46,8 @@ const failFetchEdit = error => ({
   error
 });
 
+
+
 const reqSubmitEdit = () => ({
   type: adminConstants.REQUEST_SUBMIT_FOR_EDIT
 });
@@ -55,6 +58,17 @@ const sucSubmitEdit = vacation => ({
 const failSubmitEdit = error => ({
   type: adminConstants.FAILURE_SUBMIT_FOR_EDIT,
   error
+});
+
+
+
+
+export const cancelDialog = () => ({
+  type: adminConstants.CANCEL_DIALOD
+});
+
+export const openAddDialog = () => ({
+  type: adminConstants.OPEN_DIALOD
 });
 
 export const addVac = newVac => ({

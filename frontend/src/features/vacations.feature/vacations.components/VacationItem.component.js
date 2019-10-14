@@ -7,13 +7,14 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import "../vacations.assets/stylesheets/Vacations.stylesheet.css";
 import DeleteIcon from "@material-ui/icons/Delete";
+import {openEditVac} from "../../users.feature/sub-features/admin/admin.redux/Admin.actions";
 import { connect } from "react-redux";
 
 import { Styles } from "../vacations.assets/stylesheets/Vacations.stylesheet";
 
 class VacationItem extends Component {
   render() {
-    const { isEditable } = this.props;
+    const { isEditable , dispatch} = this.props;
 
     return (
       <div className="vacation-item">
@@ -29,7 +30,7 @@ class VacationItem extends Component {
             </Typography>
             {isEditable && (
               <CardActions>
-                <Button size="small">Edit</Button>
+                <Button size="small" onClick={()=>dispatch(openEditVac(this.props.vacId))}>Edit</Button>
                 <Button size="small">Delete</Button>
               </CardActions>
             )}

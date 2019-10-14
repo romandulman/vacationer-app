@@ -27,6 +27,7 @@ class Vacations extends Component {
           vacations.map(item => (
             <VacItemComponent
               key={item.id}
+              vacId={item.id}
               followerscount={item.followerscount}
               description={item.description}
               price={item.price}

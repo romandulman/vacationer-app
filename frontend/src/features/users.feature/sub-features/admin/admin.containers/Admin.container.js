@@ -10,7 +10,7 @@ import { Styles } from "../admin.assets/stylesheets/Admin.stylesheet";
 import EditIcon from "@material-ui/icons/Edit";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import Reports from "../admin.componets/AdminReports.component";
-import { makeVacEditable } from "../admin.redux/Admin.actions";
+import { makeVacEditable,openAddDialog } from "../admin.redux/Admin.actions";
 import AddEditVacDialod from "./AdminAddEditVac.container";
 
 class Admin extends Component {
@@ -21,8 +21,9 @@ class Admin extends Component {
   };
 
   handleAddVacation = () => {
+    const { dispatch } = this.props;
 
-
+dispatch(openAddDialog())
   };
 
   handleShowEditSection = () => {
@@ -45,6 +46,7 @@ class Admin extends Component {
           <div>
             {showVacations && <VacContainer />}
             {showReports && <Reports />}
+            <AddEditVacDialod/>
           </div>
           <BottomNavigation showLabels className={classes.bottomNav}>
             <BottomNavigationAction
@@ -53,7 +55,7 @@ class Admin extends Component {
               icon={<EditIcon />}
             />
             <BottomNavigationAction
-              label="Edit Vacations"
+              label="Add Vacation"
               onClick={this.handleAddVacation}
               icon={<AddCircleOutlineIcon />}
             />

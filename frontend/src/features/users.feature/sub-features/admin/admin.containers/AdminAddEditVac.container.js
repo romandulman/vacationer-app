@@ -13,13 +13,14 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import { Styles } from "../user.assets/stylesheets/User.stylesheet";
+import { Styles } from "../../../user.assets/stylesheets/User.stylesheet";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from "@material-ui/pickers";
-import AdminAddEditVac from "../admin.componets/AdminAddEditVac.component";
+
+import{cancelDialog} from "../admin.redux/Admin.actions";
 
 class AddEditVac extends Component {
   state = {
@@ -86,19 +87,27 @@ class AddEditVac extends Component {
       showMe: false
     });
   };
-  handleOpen = (type, selectedVacData) => {
-    this.setState({ showMe: true });
-    if (type === "Edit") {
+
+  submitForm=()=>{
+    const {showDialog, dispatch} = this.props;
+   // alert(showDialog.opType)
+    if(showDialog.opType==='Edit'){
+      alert(showDialog.opType)
     }
-  };
+    if(showDialog.opType==='Add'){
+      alert(showDialog.opType)
+    }
+  }
+
 
   render() {
-    const { classes } = this.props;
-    const { toDate, fromDate, opType } = this.state;
+    const { classes, vacData, showDialog, dispatch } = this.props;
+    const { toDate, fromDate, opType,showMe } = this.state;
+
     return (
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={showDialog.show}
+        onClose={this.handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -112,6 +121,7 @@ class AddEditVac extends Component {
               label="Description"
               name="description"
               type="text"
+              value={vacData&&vacData.description}
               onChange={e => {
                 this.onFieldChange(e);
               }}
@@ -155,9 +165,9 @@ class AddEditVac extends Component {
             );
           </DialogContent>
           <DialogActions>
-            <Button color="primary">Cancel</Button>
-            <Button type="submit" color="primary">
-              Edit
+            <Button color="primary" onClick={()=>dispatch(cancelDialog())}>Cancel</Button>
+            <Button onClick={this.submitForm} color="primary">
+              {showDialog.opType}
             </Button>
           </DialogActions>
         </form>
@@ -168,8 +178,10 @@ class AddEditVac extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state.AdminReducer.data)
   return {
-    vacData: state.AdminReducer.edit
+    vacData: state.AdminReducer.data,
+    showDialog: state.AdminReducer.showDialog
   };
 };
 
