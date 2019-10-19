@@ -9,6 +9,8 @@ const router = require("./routes/index");
 const db = require("./models").sequelize;
 const helmet = require("helmet");
 const passport = require("passport");
+const multer = require('multer');
+
 require("./config/passport.config");
 const app = express();
 
@@ -29,6 +31,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/uploads',express.static('uploads'));
+
 app.use(passport.initialize());
 
 app.use("/users", router.usersRouter);

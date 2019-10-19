@@ -7,9 +7,9 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import "../vacations.assets/stylesheets/Vacations.stylesheet.css";
 import DeleteIcon from "@material-ui/icons/Delete";
+
 import {openEditVac} from "../../users.feature/sub-features/admin/admin.redux/Admin.actions";
 import { connect } from "react-redux";
-
 import { Styles } from "../vacations.assets/stylesheets/Vacations.stylesheet";
 
 class VacationItem extends Component {
@@ -39,14 +39,14 @@ class VacationItem extends Component {
               color="textSecondary"
               gutterBottom
             >
-              D: {this.props.description}
+              Description: {this.props.description}
             </Typography>
             <Typography
               className="item-price"
               color="textSecondary"
               gutterBottom
             >
-              {this.props.price} $
+            Price: {this.props.price} $
             </Typography>
 
             <img src={this.props.images} className="item-image" />
@@ -56,7 +56,8 @@ class VacationItem extends Component {
               color="textSecondary"
               gutterBottom
             >
-              {this.props.datefrom} To {this.props.dateto}
+              Dates:
+              <p>{this.props.datefrom} To {this.props.dateto}</p>
             </Typography>
           </CardContent>
           <CardActions>

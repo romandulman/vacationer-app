@@ -1,4 +1,30 @@
 const model = require("../models");
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+
+    cb(null, '../uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' +file.originalname )
+  }
+})
+var upload = multer({ storage: storage }).single('file')
+exports.newVacation =  (req, res) => {
+  //.log('thh',req.body.data.imageFile)
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err)
+    } else if (err) {
+      return res.status(500).json(err)
+    }
+    return res.status(200).send('req.body.data.imageFile')
+
+  })
+};
+
+
 
 exports.getAllVacations = async (req, res) => {
   try {
@@ -20,9 +46,7 @@ exports.getSingleVacation = (req, res) => {
   } catch (e) {}
 };
 
-exports.newVacation = async (req, res) => {
-  res.send("");
-};
+
 
 exports.deleteVacation = async (req, res) => {};
 

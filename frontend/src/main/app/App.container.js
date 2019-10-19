@@ -24,7 +24,7 @@ class App extends Component {
             <Redirect to="/allvacations" />
           </PrivateRoute>
           <PrivateRoute exact path="/allvacations" component={VacContainer} />
-          0 <Route path="/login" component={UserLogin} />
+           <Route path="/login" component={UserLogin} />
           <Route path="/register" component={UserRegister} />
           <AdminPrivateRoute exact path="/admin" component={AdminContainer} />
           <br />

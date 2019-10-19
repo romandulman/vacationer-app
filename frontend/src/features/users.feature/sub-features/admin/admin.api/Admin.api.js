@@ -19,6 +19,20 @@ export const PostVacationToEdit = (vacId, newVacData) => {
   return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
 };
 
+
+export const PostNewVacation = ( newVacData) => {
+  console.log(newVacData)
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({data:newVacData})
+  };
+
+  return fetch(`/vacations`, requestOptions).then(handleResponse);
+};
+
+
+
 const handleResponse = response => {
   return response.json().then(text => {
     const data = text;

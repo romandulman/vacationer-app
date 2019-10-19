@@ -13,6 +13,8 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { Styles } from "../../../user.assets/stylesheets/User.stylesheet";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -20,7 +22,7 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 
-import{cancelDialog} from "../admin.redux/Admin.actions";
+import {cancelDialog,submitEditVac,submitNewVac} from "../admin.redux/Admin.actions";
 
 class AddEditVac extends Component {
   state = {
@@ -30,8 +32,9 @@ class AddEditVac extends Component {
     destination: "",
     fromDate: new Date("2014-08-18T21:11:54"),
     toDate: new Date("2014-08-18T21:11:54"),
+    price: "",
     image: "",
-    price: ""
+    imageFile:null
   };
 
   componentDidMount() {
@@ -39,42 +42,42 @@ class AddEditVac extends Component {
     //dispatch(UserLogoutAction)
   }
 
-  handleLogin = e => {
-    e.preventDefault();
-    /*    this.setState({ submitted: true });
-    const { username, password } = this.state;
-    const { dispatch } = this.props;
-    if (username && password ) {
-      dispatch(UserLoginAction(username, password));
-      this.resetForm();
-    } else {
-      !username ? alert("Username missing") : alert("Password missing");
-    }*/
-  };
 
   resetForm = () => {
     this.setState({
       description: "",
       destination: "",
-      fromDate: "",
-      toDate: "",
+      fromDate: new Date("2014-08-18T21:11:54"),
+      toDate: new Date("2014-08-18T21:11:54"),
       image: "",
-      price: ""
+      price: "",
+      imageFile:null
     });
   };
 
   onFieldChange = e => {
-    const { type, name, value } = e.target;
+    const {type, name, value, files} = e.target;
 
     if (type === "text") {
       this.setState({
         [name]: value
       });
-    } else {
+    }
+
+    if (type === "file") {
       this.setState({
-        [name]: value
+        [name]: e.target.files[0]
       });
     }
+    console.log(this.state.imageFile)
+
+  };
+
+
+  handleFromDateChange = date => {
+    this.setState({
+      fromDate: date
+    });
   };
   handleToDateChange = date => {
     this.setState({
@@ -83,25 +86,44 @@ class AddEditVac extends Component {
   };
 
   handleClose = () => {
-    this.setState({
-      showMe: false
-    });
+    const {showDialog, dispatch} = this.props;
+
+    dispatch(cancelDialog());
+    this.resetForm()
   };
 
-  submitForm=()=>{
+  submitForm=(e)=>{
     const {showDialog, dispatch} = this.props;
-   // alert(showDialog.opType)
-    if(showDialog.opType==='Edit'){
-      alert(showDialog.opType)
+    e.preventDefault();
+    const imageFile = new FormData();
+/*    data.append('description' ,this.state.description);
+    data.append('destination' ,this.state.destination);
+    data.append('fromDate' ,this.state.fromDate);
+    data.append('toDate' ,this.state.toDate);
+    data.append('price' ,this.state.price);*/
+    imageFile.append('imageFile', this.state.imageFile);
+
+    const data ={
+      description:this.state.description,
+      destination:this.state.destination,
+      fromDate:this.state.fromDate,
+      toDate: this.state.toDate,
+      price: this.state.price,
+      imageFile: this.state.imageFile
     }
+
+    if(showDialog.opType==='Edit'){
+     console.log(data)
+    }
+
     if(showDialog.opType==='Add'){
-      alert(showDialog.opType)
+      dispatch(submitNewVac(data))
     }
   }
 
 
   render() {
-    const { classes, vacData, showDialog, dispatch } = this.props;
+    const { classes, vacData, showDialog, dispatch,loading } = this.props;
     const { toDate, fromDate, opType,showMe } = this.state;
 
     return (
@@ -111,8 +133,8 @@ class AddEditVac extends Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <form onSubmit={this.handleLogin}>
-          <DialogTitle id="alert-dialog-title">{opType}</DialogTitle>
+        {/*<form onSubmit={this.handleLogin}>*/}
+          <DialogTitle id="alert-dialog-title">{showDialog.opType}</DialogTitle>
 
           <DialogContent>
             <TextField
@@ -121,7 +143,7 @@ class AddEditVac extends Component {
               label="Description"
               name="description"
               type="text"
-              value={vacData&&vacData.description}
+              value={showDialog.opType==='Edit' ? vacData.description : this.state.description}
               onChange={e => {
                 this.onFieldChange(e);
               }}
@@ -133,6 +155,7 @@ class AddEditVac extends Component {
               label="Destination"
               name="destination"
               type="text"
+              value={showDialog.opType==='Edit' ? vacData.destination : this.state.destination}
               onChange={e => {
                 this.onFieldChange(e);
               }}
@@ -142,36 +165,57 @@ class AddEditVac extends Component {
               autoFocus
               margin="dense"
               label="Price"
-              name="destination"
+              name="price"
               type="text"
+              value={showDialog.opType==='Edit' ? vacData.price : this.state.price}
               onChange={e => {
                 this.onFieldChange(e);
               }}
               fullWidth
             />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              From
               <KeyboardDatePicker
                 margin="normal"
                 id="date-picker-dialog"
                 label="Date picker dialog"
                 format="MM/dd/yyyy"
-                value={fromDate}
-                onChange={this.handleToDateChange}
+                name="fromDate"
+                value={showDialog.opType==='Edit' ? vacData.from : this.state.fromDate}
+                onChange={this.handleFromDateChange}
                 KeyboardButtonProps={{
                   "aria-label": "change date"
                 }}
               />
+              To:
+              <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  label="Date picker dialog"
+                  format="MM/dd/yyyy"
+                  name="toDate"
+                  value={showDialog.opType==='Edit' ? vacData.to : this.state.toDate}
+                  onChange={this.handleToDateChange}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date"
+                  }}
+              />
             </MuiPickersUtilsProvider>
             );
+            <label>Image:</label>
+            {showDialog.opType==='Edit' ? <img src=''/> : <input type="file" name="imageFile" onChange={e=>{this.onFieldChange(e)}} />}
           </DialogContent>
           <DialogActions>
-            <Button color="primary" onClick={()=>dispatch(cancelDialog())}>Cancel</Button>
-            <Button onClick={this.submitForm} color="primary">
+            <Button color="primary" onClick={this.handleClose}>Cancel</Button>
+            <Button variant="contained" color="primary" onClick={e=>{this.submitForm(e)}} color="primary">
               {showDialog.opType}
+             {loading && <CircularProgress size={24} /> }
             </Button>
           </DialogActions>
+{/*
         </form>
-        <hr />
+*/}
+        <hr/>
       </Dialog>
     );
   }
@@ -181,7 +225,8 @@ const mapStateToProps = state => {
   console.log(state.AdminReducer.data)
   return {
     vacData: state.AdminReducer.data,
-    showDialog: state.AdminReducer.showDialog
+    showDialog: state.AdminReducer.showDialog,
+    loading: state.AdminReducer.loading
   };
 };
 

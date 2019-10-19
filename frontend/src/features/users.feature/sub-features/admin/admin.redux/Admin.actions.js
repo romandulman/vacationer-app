@@ -1,5 +1,5 @@
 import { adminConstants } from "./Admin.constants";
-import { GetVacationToEdit, PostVacationToEdit } from "../admin.api/Admin.api";
+import { GetVacationToEdit, PostVacationToEdit,PostNewVacation } from "../admin.api/Admin.api";
 
 export const openEditVac = id => {
   return dispatch => {
@@ -26,6 +26,20 @@ export const submitEditVac = data => {
       error => {
         dispatch(failSubmitEdit(error));
       }
+    );
+  };
+};
+
+export const submitNewVac = data => {
+  return dispatch => {
+    dispatch(reqSubmitNew());
+    PostNewVacation(data).then(
+        response => {
+          dispatch(sucSubmitNew(response));
+        },
+        error => {
+          dispatch(failSubmitNew(error));
+        }
     );
   };
 };
@@ -62,13 +76,27 @@ const failSubmitEdit = error => ({
 
 
 
+const reqSubmitNew = () => ({
+  type: adminConstants.REQUEST_SUBMIT_NEW
+});
+const sucSubmitNew = vacation => ({
+  type: adminConstants.SUCCESS_SUBMIT_NEW,
+  vacation
+});
+const failSubmitNew = error => ({
+  type: adminConstants.FAILURE_SUBMIT_NEW,
+  error
+});
+
+
+
 
 export const cancelDialog = () => ({
-  type: adminConstants.CANCEL_DIALOD
+  type: adminConstants.CANCEL_DIALOG
 });
 
 export const openAddDialog = () => ({
-  type: adminConstants.OPEN_DIALOD
+  type: adminConstants.OPEN_DIALOG
 });
 
 export const addVac = newVac => ({
