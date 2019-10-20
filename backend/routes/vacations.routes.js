@@ -10,4 +10,7 @@ vacationsRouter.post("/", adminCheck, vacationsController.newVacation);
 vacationsRouter.delete("/:id", adminCheck, vacationsController.deleteVacation);
 vacationsRouter.put("/:id", adminCheck, vacationsController.editVacation);
 
+vacationsRouter.post("/follow/:id", userCheck, vacationsController.followVacation);
+vacationsRouter.put("/follow/:id", userCheck, vacationsController.unfollowVacation);
+
 module.exports.vacationsRouter = vacationsRouter;

@@ -73,4 +73,3 @@ const regFailure = error => {
     return { type: UserConstants.REGISTER_FAILURE, error };
 };
 
-

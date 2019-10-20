@@ -51,3 +51,12 @@ exports.getSingleVacation = (req, res) => {
 exports.deleteVacation = async (req, res) => {};
 
 exports.editVacation = async (req, res) => {};
+
+
+exports.followVacation = async (req, res) => {
+
+};
+
+exports.unfollowVacation = async (req, res) => {
+
+};

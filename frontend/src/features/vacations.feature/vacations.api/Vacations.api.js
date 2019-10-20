@@ -13,6 +13,32 @@ export const GetAllVecations = () =>{
 };
 
 
+export const Follow = vacation =>{
+    const requestOptions = {
+        method: "POST",
+        headers: authHeader()
+        //body: JSON.stringify({ id:vacation.id})
+    };
+
+    return fetch(`/users/follow/${vacation.id}`,requestOptions)
+        .then(handleResponse)
+};
+
+
+export const unFollow = vacation =>{
+    const requestOptions = {
+        method: "PUT",
+        headers: authHeader()
+        //body: JSON.stringify({ id:vacation.id})
+    };
+
+    return fetch(`/users/follow/${vacation.id}`,requestOptions)
+        .then(handleResponse)
+};
+
+
+
+
 
 const handleResponse = response =>{
 

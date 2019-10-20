@@ -3,6 +3,7 @@ import { VacConstants } from "./Vacations.constants";
 const initialState = {
   vacData: [],
   loading: false,
+  followLoading:false,
   error: null
 };
 
@@ -16,7 +17,7 @@ export const VacationsReducer = (state = initialState, action) => {
     case VacConstants.SUCCESS_ALL:
       return {
         ...state,
-        vacData: action.payload.vacData,
+        vacData: action.vacData,
         loading: false
       };
 
@@ -25,6 +26,33 @@ export const VacationsReducer = (state = initialState, action) => {
         ...state,
         loading: false
       };
+
+    case VacConstants.FOLLOW_REQUEST:
+      return {
+        ...state,
+        followLoading: true,
+
+      };
+
+    case VacConstants.FOLLOW_SUCCESS:
+      return {
+        ...state,
+        vacData:action.vacData,
+        followLoading: false
+      };
+
+    case VacConstants.UNFOLLOW_SUCCESS:
+      return {
+        ...state,
+        vacData:action.vacData,
+        followLoading:false
+      }
+    case VacConstants.FOLLOW_FAILURE:
+      return {
+        ...state,
+        followLoading: false
+      };
+
     default:
       return state;
   }

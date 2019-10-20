@@ -1,15 +1,19 @@
-const EditVacConstants = {
-  ADD_VACATION: "ADD_VACATION",
-  EDIT_VACATION: "EDIT_VACATION"
-};
 
 const VacConstants = {
   REQUEST_ALL: "REQUEST_ALL",
   SUCCESS_ALL: "SUCCESS_ALL",
   FAILURE_ALL: "FAILURE_ALL",
 
+
+
+  FOLLOW_REQUEST: 'FOLLOW_REQUEST',
+  FOLLOW_SUCCESS: 'FOLLOW_SUCCESS',
+  FOLLOW_FAILURE: 'FOLLOW_FAILURE',
+  UNFOLLOW_SUCCESS: 'UNFOLLOW_SUCCESS',
+
+
   SHOW_ALL: "SHOW_ALL",
   SHOW_ONE: "SHOW_ONE"
 };
 
-export { EditVacConstants, VacConstants };
+export { VacConstants };
