@@ -19,7 +19,8 @@ class VacationItem extends Component {
     return (
       <div className="vacation-item">
         <Card className="item-card">
-          <div></div>
+          <div> <img width="300"  src={`http://localhost:8080/${this.props.image}`}/>
+          </div>
           <CardContent>
             <Typography
               className="item-description"
@@ -48,8 +49,6 @@ class VacationItem extends Component {
             >
             Price: {this.props.price} $
             </Typography>
-
-            <img src={this.props.images} className="item-image" />
 
             <Typography
               className="item-dates"

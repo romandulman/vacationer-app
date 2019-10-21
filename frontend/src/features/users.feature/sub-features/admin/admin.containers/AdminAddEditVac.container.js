@@ -110,7 +110,7 @@ class AddEditVac extends Component {
       toDate: this.state.toDate,
       price: this.state.price,
       imageFile: this.state.imageFile
-    }
+    };
 
     if(showDialog.opType==='Edit'){
      console.log(data)
@@ -203,7 +203,7 @@ class AddEditVac extends Component {
             </MuiPickersUtilsProvider>
             );
             <label>Image:</label>
-            {showDialog.opType==='Edit' ? <img src=''/> : <input type="file" name="imageFile" onChange={e=>{this.onFieldChange(e)}} />}
+            {showDialog.opType==='Edit' ? <img src={`http://localhost:8080/uploads/${vacData.image}`}/> : <input type="file" name="imageFile" onChange={e=>{this.onFieldChange(e)}} />}
           </DialogContent>
           <DialogActions>
             <Button color="primary" onClick={this.handleClose}>Cancel</Button>

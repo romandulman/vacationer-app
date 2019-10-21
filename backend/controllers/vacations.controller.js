@@ -6,37 +6,31 @@ var storage = multer.diskStorage({
     cb(null, './uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' +file.originalname ) //
+    cb(null, file.originalname ) //Date.now() + '-' +
   }
-})
-
+});
 var upload = multer({ storage: storage }).single('imageFile')
 
-exports.newVacation =  (req, res) => {
-
-    upload(req, res,   async function (err) {
+exports.newVacation = (req, res) => {
+    upload(req, res,   async err => {
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err)
         } else if (err) {
             return res.status(500).json(err)
         }
 
-console.log(req.body.from)
-           await     model.Vacations.create({
-
+   console.log(req.body.from)
+           await   model.Vacations.create({
                     description: req.body.description,
                     destination: req.body.destination,
-                    image: `uploads/${Date.now() + '-' + req.file.originalname}`,
+                    image: `uploads/${req.file.originalname}`,
                     from: req.body.fromDate,
                     to: req.body.toDate,
                     price: req.body.price,
                     followerscount: 0,
-
             })
-
     })
    // return
-
 };
 
 
