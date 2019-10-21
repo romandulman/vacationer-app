@@ -96,11 +96,11 @@ class AddEditVac extends Component {
     const {showDialog, dispatch} = this.props;
     e.preventDefault();
     const imageFile = new FormData();
-/*    data.append('description' ,this.state.description);
-    data.append('destination' ,this.state.destination);
-    data.append('fromDate' ,this.state.fromDate);
-    data.append('toDate' ,this.state.toDate);
-    data.append('price' ,this.state.price);*/
+    imageFile.append('description' ,this.state.description);
+    imageFile.append('destination' ,this.state.destination);
+    imageFile.append('fromDate' ,this.state.fromDate);
+    imageFile.append('toDate' ,this.state.toDate);
+    imageFile.append('price' ,this.state.price);
     imageFile.append('imageFile', this.state.imageFile);
 
     const data ={
@@ -117,7 +117,7 @@ class AddEditVac extends Component {
     }
 
     if(showDialog.opType==='Add'){
-      dispatch(submitNewVac(data))
+      dispatch(submitNewVac(imageFile))
     }
   }
 

@@ -15,7 +15,7 @@ export const UserLoginAction = (username, password) => {
     UserLogin(username, password).then(
       user => {
           console.log(user)
-        dispatch(success(user));
+         dispatch(success(user));
      //history.push("/allvacations");
       },
 

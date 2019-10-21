@@ -3,47 +3,69 @@ var multer = require('multer');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-
-    cb(null, '../uploads/')
+    cb(null, './uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' +file.originalname )
+    cb(null, Date.now() + '-' +file.originalname ) //
   }
 })
-var upload = multer({ storage: storage }).single('file')
-exports.newVacation =  (req, res) => {
-  //.log('thh',req.body.data.imageFile)
-  upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      return res.status(500).json(err)
-    } else if (err) {
-      return res.status(500).json(err)
-    }
-    return res.status(200).send('req.body.data.imageFile')
 
-  })
+var upload = multer({ storage: storage }).single('imageFile')
+
+exports.newVacation =  (req, res) => {
+
+    upload(req, res,   async function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json(err)
+        } else if (err) {
+            return res.status(500).json(err)
+        }
+
+console.log(req.body.from)
+           await     model.Vacations.create({
+
+                    description: req.body.description,
+                    destination: req.body.destination,
+                    image: `uploads/${Date.now() + '-' + req.file.originalname}`,
+                    from: req.body.fromDate,
+                    to: req.body.toDate,
+                    price: req.body.price,
+                    followerscount: 0,
+
+            })
+
+    })
+   // return
+
 };
 
 
 
 exports.getAllVacations = async (req, res) => {
   try {
-    model.Vacations.findAll({ raw: true }).then(vacations => {
+   await model.Vacations.findAll({ raw: true }).then(vacations => {
       res.send(vacations);
     });
   } catch (e) {}
 };
-exports.getSingleVacation = (req, res) => {
+
+
+exports.getSingleVacation = async (req, res) => {
   try {
     console.log(req.params.id);
-    model.Vacations.findOne({
+ const record =  await model.Vacations.findOne({
       where: {
         id: req.params.id
       }
-    }).then(vacation => {
-      res.send(vacation);
-    });
-  } catch (e) {}
+    });//.//then(vacation => {
+    console.log(record)
+    res.send(record);
+   // });
+
+  } catch (e) {
+
+
+  }
 };
 
 

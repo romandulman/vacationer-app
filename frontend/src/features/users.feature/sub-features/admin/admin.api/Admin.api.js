@@ -1,4 +1,4 @@
-import authHeader from "../../../../../helpers/authHeader";
+import authHeader from "../../../../../helpers/authHeader-Admin";
 
 export const GetVacationToEdit = vacId => {
   const requestOptions = {
@@ -25,7 +25,7 @@ export const PostNewVacation = ( newVacData) => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
-    body: JSON.stringify({data:newVacData})
+    body: newVacData
   };
 
   return fetch(`/vacations`, requestOptions).then(handleResponse);
