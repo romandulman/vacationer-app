@@ -8,7 +8,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import { Styles } from "../user.assets/stylesheets/User.stylesheet";
-import { NamesCheck, UserRegisterAction } from "../user.redux/User.actions";
+import { namesCheck, userRegister } from "../user.redux/User.actions";
 
 class UserRegister extends Component {
   state = {
@@ -17,25 +17,45 @@ class UserRegister extends Component {
     repassword: "",
     firstname: "",
     lastname: "",
+    email:"",
     submitted: false
   };
 
   handleRegister = e => {
     e.preventDefault();
+
     this.setState({ submitted: true });
-    const { username, password, repassword, firstname, lastname } = this.state;
+    const { username, password, repassword, firstname, lastname, email } = this.state;
     const { dispatch } = this.props;
+
+    if(username.length<2 || password.length<2 || firstname.length<2 || lastname.length<2 ){
+      return alert(' All fields are mandatory !');
+    };
+    if(password !== repassword){
+      return alert(' The passwords are not match');
+    };
+
+    const newUser = {
+      username: username,
+      password: password,
+      first_name: firstname,
+      last_name:lastname,
+      email: email
+    };
+
+    console.log(newUser);
+    dispatch(userRegister(newUser))
   };
 
   onFieldChange = e => {
     const { type, name, value } = e.target;
 
-    if (type === "text") {
+    if (type === "text" || type === "email") {
       this.setState({
         [name]: value
       });
       //   this.checkIfNameTaken(this.state.username)
-      NamesCheck(this.state.username);
+   //   namesCheck(this.state.username);
     } else {
       this.setState({
         [name]: value
@@ -133,19 +153,9 @@ class UserRegister extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.isLoggedIn
+
   };
 };
 
-const mapDispachToProps = dispach => {
-  return {
-    LoginConfirm: profile =>
-      dispach({ type: "IsLoggedIn", UserProfile: profile }),
-    handleShowLogin: () => dispach({ type: "LOGIN" })
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  mapDispachToProps
-)(withStyles(Styles)(UserRegister));
+export default connect(mapStateToProps)(withStyles(Styles)(UserRegister));

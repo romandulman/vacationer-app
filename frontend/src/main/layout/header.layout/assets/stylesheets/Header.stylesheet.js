@@ -1,4 +1,5 @@
 import '../../../../common/assets/stylesheets/fonts.css'
+
 export const styles = {
     main: {
         backgroundColor: "#fff",
@@ -9,7 +10,6 @@ export const styles = {
     title: {
         flexGrow: 1
     },
-
     logoText: {
         fontSize: 18,
         fontWeight: 700,
@@ -18,12 +18,10 @@ export const styles = {
         marginRight: "30px",
         marginBottom: "1px"
     },
-
     Desklogo: {
         marginTop: 1,
         marginRight: "15px"
     },
-
     tooltipo: {
         size: 18,
         fontSize: 20

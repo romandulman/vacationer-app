@@ -4,6 +4,7 @@ import {VacConstants} from "../../../../vacations.feature/vacations.redux/Vacati
 const initialState = {
   showReports: false,
   showVacEdit: false,
+  isEditable:false,
   showDialog: {show:false,opType:null},
   vacations:[]
 };

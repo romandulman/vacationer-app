@@ -1,34 +1,18 @@
 import React, {Component} from "react";
 import {withStyles} from "@material-ui/core/styles";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import {UserLogoutAction} from "../../../features";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import logoIco from "./assets/images/departure.png";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
-import Tooltip from "@material-ui/core/Tooltip";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import {styles} from "./assets/stylesheets/Header.stylesheet";
-import "./assets/stylesheets/header.stylesheet.css";
-import {UserLogoutAction} from "../../../features";
 
 class Header extends Component {
-    state = {
-        open: ""
-    };
-
-    handleMenu = () => {
-        this.state.open
-            ? this.setState({open: false})
-            : this.setState({open: true});
-    };
 
     render() {
-        const {classes, loggedIn, dispatch, isAdmin} = this.props;
+        const {classes, loggedIn, dispatch, isAdmin,user} = this.props;
         return (
             <div>
                 <AppBar position="static" className={classes.main}>
@@ -47,27 +31,16 @@ class Header extends Component {
                                 Login
                             </Button>
                         )}
-
                         {loggedIn && (
                             <div>
-
-                                <Button component={Link} to="/allvacations">
-                                    Vacations
-                                </Button>
+                                <Button component={Link} to="/allvacations">Vacations</Button>
                                 {isAdmin && (
-                                    <Button
-                                        onClick={this.handleMenu}
-                                        component={Link}
-                                        to="/admin"
-                                    >
-                                        Admin Panel
-                                    </Button>
+                                    <Button onClick={this.handleMenu} component={Link} to="/admin">Admin Panel</Button>
                                 )}
-                                <Button color="primary" onClick={() => {
-                                    dispatch(UserLogoutAction());
-                                }}>Logout</Button>
+                                <Button color="primary" onClick={() => {dispatch(UserLogoutAction());}}>Logout</Button>
                             </div>
                         )}
+                        {user &&  <div>Hi, {user}</div>}
                     </Toolbar>
                 </AppBar>
             </div>
@@ -78,7 +51,8 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         loggedIn: state.UserReducer.loggedIn,
-        isAdmin: state.UserReducer.isAdmin
+        isAdmin: state.UserReducer.isAdmin,
+        user:  state.UserReducer.loggedIn && state.UserReducer.user.profile.firstname
     };
 };
 

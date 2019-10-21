@@ -1,16 +1,16 @@
 import authHeader from "../../../../../helpers/authHeader-Admin";
 
+/*Get all  vacations */
 export const GetVacationToEdit = vacId => {
   const requestOptions = {
     method: "GET",
     headers: authHeader()
   };
-
   return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
 };
 
 
-/*Update vacation action*/
+/*Update vacation */
 export const UpdateVacation = ( newVacData, vacId) => {
   const requestOptions = {
     method: "PUT",
@@ -21,7 +21,7 @@ export const UpdateVacation = ( newVacData, vacId) => {
 };
 
 
-/*Add new vacation action*/
+/*Add new vacation */
 export const PostNewVacation =  newVacData => {
   const requestOptions = {
     method: "POST",
@@ -32,7 +32,7 @@ export const PostNewVacation =  newVacData => {
 };
 
 
-/*Delete vacation action*/
+/*Delete vacation */
 export  const DeleteVacation = vacId =>{
   const requestOptions = {
     method: "DELETE",
@@ -41,10 +41,11 @@ export  const DeleteVacation = vacId =>{
   return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
 };
 
+
+/*Respone handler */
 const handleResponse = response => {
   return response.json().then(text => {
     const data = text;
-    console.log(data)
     if (response.status !== 201) {
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);

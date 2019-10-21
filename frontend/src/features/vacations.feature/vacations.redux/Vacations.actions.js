@@ -45,9 +45,7 @@ export const unFollowVac = (id) => dispatch => {
 
 const reqGetAll = vacData => ({
   type: VacConstants.REQUEST_ALL
-  //  payload: {vacData}
 });
-
 
 const sucGetAll = vacData => ({
   type: VacConstants.SUCCESS_ALL, vacData

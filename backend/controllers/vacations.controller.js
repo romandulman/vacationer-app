@@ -46,7 +46,7 @@ exports.newVacation = (req, res) => {
 exports.getAllVacations = async (req, res) => {
     try {
         await model.Vacations.findAll({raw: true}).then(vacations => {
-            res.send(vacations);
+            res.status(201).send(vacations);
         });
     } catch (e) {
     }
@@ -84,36 +84,35 @@ exports.deleteVacation = async (req, res) => {
 
 exports.updateVacation = (req, res) => {
 
-        upload(req, res, async err => {
-            console.log(req.body.toDate,req.body.fromDate)
-            if (err instanceof multer.MulterError) {
-                return res.status(500).json(err)
-            } else if (err) {
-                return res.status(500).json(err)
-            }
-            try{
-                await model.Vacations.update({
-                        description: req.body.description,
-                        destination: req.body.destination,
-                        image: `uploads/${req.file.originalname}`,
-                        from: req.body.fromDate,
-                        to: req.body.toDate,
-                        price: req.body.price,
-                    },
-                    {where: {id: req.params.id},
-                     returning: true, // needed for affectedRows to be populated
+    upload(req, res, async err => {
+        console.log(req.body.toDate, req.body.fromDate)
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json(err)
+        } else if (err) {
+            return res.status(500).json(err)
+        }
+        try {
+            await model.Vacations.update({
+                    description: req.body.description,
+                    destination: req.body.destination,
+                    image: `uploads/${req.file.originalname}`,
+                    from: req.body.fromDate,
+                    to: req.body.toDate,
+                    price: req.body.price,
+                },
+                {
+                    where: {id: req.params.id},
+                    returning: true, // needed for affectedRows to be populated
                     plain: true // makes sure that the returned instances are just plain objects
-                    });
+                });
 
-                res.status(201)
-            }catch (e) {
-                res.status(500).send(e)
-            }
-        })
-        // return
-    };
-
-
+            res.status(201)
+        } catch (e) {
+            res.status(500).send(e)
+        }
+    })
+    // return
+};
 
 
 exports.followVacation = async (req, res) => {

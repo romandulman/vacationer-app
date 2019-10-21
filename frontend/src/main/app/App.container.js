@@ -27,7 +27,6 @@ class App extends Component {
            <Route path="/login" component={UserLogin} />
           <Route path="/register" component={UserRegister} />
           <AdminPrivateRoute exact path="/admin" component={AdminContainer} />
-
         </Router>
       </div>
     );
@@ -36,7 +35,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.UserReducer.loading
+  //  loading: state.UserReducer.loading
   };
 };
 

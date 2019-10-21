@@ -27,8 +27,7 @@ class AddEditVac extends Component {
         toDate: new Date("2014-08-18T21:11:54"),
         price: "",
         image: "",
-        imageFile: null,
-        errorBag:[]
+        imageFile: null
     };
 
     componentDidMount() {
@@ -107,7 +106,7 @@ class AddEditVac extends Component {
         formData.append('toDate', toDate);
         formData.append('price', price);
         formData.append('imageFile', imageFile);
-        
+
 /*
         const data = {
             description: this.state.description,
@@ -129,22 +128,6 @@ class AddEditVac extends Component {
           this.handleClose();
         }
     };
-
-/*    validator = ()=>{
-        const {description, destination, fromDate, toDate, price, image} = this.state;
-        let errors = [];
-
-        if (description.length<0) {
-            alert()
-           errors.push('Description required.');
-        }
-        if (!destination) {
-            errors.push('Destination required.');
-        }
-      if(errors.length>0){
-         return alert(errors)
-      }
-    }*/
 
     render() {
         const {showDialog, loading} = this.props;
