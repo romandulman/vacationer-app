@@ -36,9 +36,8 @@ export  const DeleteVacation = vacId =>{
     method: "DELETE",
     headers: authHeader(),
   };
-
   return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
-}
+};
 
 const handleResponse = response => {
   return response.json().then(text => {

@@ -133,9 +133,7 @@ class AddEditVac extends Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {/*<form onSubmit={this.handleLogin}>*/}
           <DialogTitle id="alert-dialog-title">{showDialog.opType}</DialogTitle>
-
           <DialogContent>
             <TextField
               autoFocus
@@ -212,9 +210,6 @@ class AddEditVac extends Component {
              {loading && <CircularProgress size={24} /> }
             </Button>
           </DialogActions>
-{/*
-        </form>
-*/}
         <hr/>
       </Dialog>
     );

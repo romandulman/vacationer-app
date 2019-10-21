@@ -8,11 +8,19 @@ import Typography from "@material-ui/core/Typography";
 import "../vacations.assets/stylesheets/Vacations.stylesheet.css";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import {openEditVac} from "../../users.feature/sub-features/admin/admin.redux/Admin.actions";
+import {openEditVac,deleteVacation} from "../../users.feature/sub-features/admin/admin.redux/Admin.actions";
 import { connect } from "react-redux";
 import { Styles } from "../vacations.assets/stylesheets/Vacations.stylesheet";
 
+
 class VacationItem extends Component {
+
+  handleDeleteVac = vacId =>{
+    const { dispatch} = this.props;
+    if(window.confirm('You are going to Delete this Vacation, are you sure?')) {
+      dispatch(deleteVacation(vacId));
+    }
+  };
   render() {
     const { isEditable , dispatch} = this.props;
 
@@ -29,12 +37,7 @@ class VacationItem extends Component {
             >
               Followers {this.props.followerscount}
             </Typography>
-            {isEditable && (
-              <CardActions>
-                <Button size="small" onClick={()=>dispatch(openEditVac(this.props.vacId))}>Edit</Button>
-                <Button size="small">Delete</Button>
-              </CardActions>
-            )}
+
             <Typography
               className="item-description"
               color="textSecondary"
@@ -60,7 +63,13 @@ class VacationItem extends Component {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Follow</Button>
+            {!isEditable && ( <Button size="small">Follow</Button>)}
+            {isEditable && (
+                <div>
+                  <Button size="small" variant="contained" color="primary" onClick={()=>dispatch(openEditVac(this.props.vacId))}>Edit</Button>
+                  <Button size="small" variant="contained" color="secondary" onClick={()=>this.handleDeleteVac(this.props.vacId)} >Delete</Button>
+                </div>
+            )}
           </CardActions>
         </Card>
       </div>

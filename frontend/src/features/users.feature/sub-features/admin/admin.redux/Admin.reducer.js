@@ -1,9 +1,11 @@
 import { adminConstants } from "./Admin.constants";
+import {VacConstants} from "../../../../vacations.feature/vacations.redux/Vacations.constants";
 
 const initialState = {
   showReports: false,
   showVacEdit: false,
-  showDialog: {show:false,opType:null}
+  showDialog: {show:false,opType:null},
+  vacations:[]
 };
 
 export const AdminReducer = (state = initialState, action) => {
@@ -23,6 +25,27 @@ export const AdminReducer = (state = initialState, action) => {
         ...state,
         showDialog: {show:false,opType:null}
       };
+
+
+    case adminConstants.REQUEST_ALL:
+      return {
+        ...state,
+        loading: true
+      };
+    case adminConstants.SUCCESS_ALL:
+      return {
+        ...state,
+        vacations: action.vacations,
+        loading: false
+      };
+
+    case adminConstants.FAILURE_ALL:
+      return {
+        ...state,
+        loading: false
+      };
+
+
 
 
 
@@ -81,17 +104,24 @@ export const AdminReducer = (state = initialState, action) => {
       };
 
 
-
-    case adminConstants.ADD_VAC:
+    case adminConstants.REQUEST_DELETE:
       return {
-
+        ...state,
+        loading: true
       };
-    case adminConstants.EDIT_VAC:
+    case adminConstants.SUCCESS_DELETE:
       return {
-
+        ...state,
+        vacations: action.updatedVacations,
+        loading: false
       };
-    case adminConstants.DELETE_VAC:
-      return {};
+    case adminConstants.FAILURE_DELETE:
+      return {
+        ...state,
+        loading: false
+      };
+
+
 
     case adminConstants.FETCH_REPORTS:
       return {

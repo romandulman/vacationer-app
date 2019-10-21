@@ -51,31 +51,23 @@ exports.getSingleVacation = async (req, res) => {
       where: {
         id: req.params.id
       }
-    });//.//then(vacation => {
-    console.log(record)
-    res.send(record);
-   // });
-
+    });
+      res.status(201).send(record);
   } catch (e) {
-
-
+res.status(404)
   }
 };
 
 
 
 exports.deleteVacation = async (req, res) => {
-    
-    await   model.Vacations.create({
-        description: req.body.description,
-        destination: req.body.destination,
-        image: `uploads/${req.file.originalname}`,
-        from: req.body.fromDate,
-        to: req.body.toDate,
-        price: req.body.price,
-        followerscount: 0,
-    })
 
+    await   model.Vacations.destroy({
+        where: {
+            id: req.params.id
+        }
+    });
+    res.status(201)
 };
 
 exports.editVacation = (req, res) => {
@@ -97,7 +89,8 @@ exports.editVacation = (req, res) => {
                 to: req.body.toDate,
                 price: req.body.price,
                 followerscount: 0,
-            })
+            });
+            res.status(201)
         })
         // return
     };

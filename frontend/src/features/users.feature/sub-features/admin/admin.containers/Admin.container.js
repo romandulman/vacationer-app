@@ -17,6 +17,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import VacItemComponent from "../../../../vacations.feature/vacations.components/VacationItem.component";
 
+import {fecthAllVacations} from "../admin.redux/Admin.actions";
+
 class Admin extends Component {
   state = {
     showVacations: false,
@@ -24,38 +26,47 @@ class Admin extends Component {
     showInfo: true
   };
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fecthAllVacations());
+  }
+
   handleAddVacation = () => {
     const { dispatch } = this.props;
-
-dispatch(openAddDialog())
+    dispatch(openAddDialog())
   };
 
   handleShowEditSection = () => {
     const { dispatch } = this.props;
-    this.setState({ showVacations: true, showReports: false });
+    this.setState({ showVacations: true, showReports: false,  showInfo: false });
     dispatch(makeVacEditable());
   };
 
   handleShowReportsSection = () => {
-    this.setState({ showVacations: false, showReports: true });
+    this.setState({ showVacations: false, showReports: true,  showInfo: false });
   };
 
   render() {
     const { classes,vacations } = this.props;
-    const { showVacations, showReports } = this.state;
+    const { showVacations, showReports,showInfo } = this.state;
 
     return (
       <div>
-        <div>
-          <div>
+        <div className={classes.rootDiv}>
+        {showInfo &&(
+            <div className={classes.infoBox}>
+            <h2>Admin Area !</h2>
+              <h5> Here You Can: Edit Vacations, Add Vacations, View Reports</h5>
+              <h5> To start please choose one of options in the bottom nav</h5>
+          </div>
+          ) }
             {showReports && <Reports />}
             <AddEditVacDialod/>
-
-            <Container>
+            { showVacations && ( <Container>
+              <Row ><h4 className={classes.infoBox}>Edit Vacations</h4></Row>
               <Row>
                 {vacations &&
                 vacations.map(item => (
-
                     <Col md={4}>    <VacItemComponent
                         key={item.id}
                         vacId={item.id}
@@ -68,23 +79,23 @@ dispatch(openAddDialog())
                     /></Col>
                 ))}
               </Row>
-            </Container>
-
-
-          </div>
+            </Container>)}
           <BottomNavigation showLabels className={classes.bottomNav}>
             <BottomNavigationAction
               label="Edit Vacations"
+              className={classes.navItem}
               onClick={this.handleShowEditSection}
               icon={<EditIcon />}
             />
             <BottomNavigationAction
               label="Add Vacation"
+              className={classes.navItem}
               onClick={this.handleAddVacation}
               icon={<AddCircleOutlineIcon />}
             />
             <BottomNavigationAction
               label="View Reports"
+              className={classes.navItem}
               icon={<AssessmentIcon />}
               onClick={this.handleShowReportsSection}
             />
@@ -98,7 +109,7 @@ dispatch(openAddDialog())
 const mapStateToProps = state => {
   return {
     showReports: state.AdminReducer.showReports, //with all data
-    vacations: state.AdminReducer.data
+    vacations: state.AdminReducer.vacations
   };
 };
 
