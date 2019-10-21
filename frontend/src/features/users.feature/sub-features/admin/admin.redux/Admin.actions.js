@@ -1,5 +1,23 @@
 import { adminConstants } from "./Admin.constants";
 import { GetVacationToEdit, PostVacationToEdit,PostNewVacation } from "../admin.api/Admin.api";
+import {GetAllVecations} from "../../../../vacations.feature/vacations.api/Vacations.api";
+
+
+
+export const fecthAllVacations = () => dispatch => {
+  GetAllVecations().then(
+      vacations => {
+        //dispatch(_showAll("k"));
+        dispatch(sucGetAll(vacations));
+
+        // history.push("/vacations");
+      },
+      error => {
+        //dispatch(failure(error));
+        //dispatch(alertActions.error(error));
+      }
+  );
+};
 
 export const openEditVac = id => {
   return dispatch => {
@@ -48,6 +66,22 @@ export const makeVacEditable = () => ({
   type: adminConstants.MAKE_VAC_EDITABLE
 });
 
+
+
+const reqGetAll = () => ({
+  type: adminConstants.REQUEST_ALL
+});
+
+const sucGetAll = vacations => ({
+  type: adminConstants.SUCCESS_ALL, vacations
+});
+
+const failureAll = vacData => ({
+  type: adminConstants.FAILURE_ALL, vacData
+});
+
+
+
 const reqFetchEdit = () => ({
   type: adminConstants.REQUEST_FETCH_FOR_EDIT
 });
@@ -79,9 +113,9 @@ const failSubmitEdit = error => ({
 const reqSubmitNew = () => ({
   type: adminConstants.REQUEST_SUBMIT_NEW
 });
-const sucSubmitNew = vacation => ({
+const sucSubmitNew = updatedVacations=> ({
   type: adminConstants.SUCCESS_SUBMIT_NEW,
-  vacation
+  updatedVacations
 });
 const failSubmitNew = error => ({
   type: adminConstants.FAILURE_SUBMIT_NEW,
@@ -89,6 +123,17 @@ const failSubmitNew = error => ({
 });
 
 
+const reqDelete = () => ({
+  type: adminConstants.REQUEST_DELETE,
+});
+const sucDelete = updatedVacations => ({
+  type: adminConstants.SUCCESS_DELETE,
+  updatedVacations
+});
+const failDelete = error => ({
+  type: adminConstants.FAILUREDELETE,
+  error
+});
 
 
 export const cancelDialog = () => ({
@@ -99,21 +144,7 @@ export const openAddDialog = () => ({
   type: adminConstants.OPEN_DIALOG
 });
 
-export const addVac = newVac => ({
-  type: adminConstants.ADD_VAC,
-  newVac
-});
 
-export const delVac = oldVac => ({
-  type: adminConstants.DELETE_VAC,
-  oldVac
-});
-
-export const editVac = (newVac, oldVac) => ({
-  type: adminConstants.EDIT_VAC,
-  newVac,
-  oldVac
-});
 
 export const viewReports = data => ({
   type: adminConstants.DELETE_VAC,

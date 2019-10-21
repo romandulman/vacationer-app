@@ -20,7 +20,7 @@ export const PostVacationToEdit = (vacId, newVacData) => {
 };
 
 
-export const PostNewVacation = ( newVacData) => {
+export const PostNewVacation =  newVacData => {
   console.log(newVacData)
   const requestOptions = {
     method: "POST",
@@ -31,7 +31,14 @@ export const PostNewVacation = ( newVacData) => {
   return fetch(`/vacations`, requestOptions).then(handleResponse);
 };
 
+export  const DeleteVacation = vacId =>{
+  const requestOptions = {
+    method: "DELETE",
+    headers: authHeader(),
+  };
 
+  return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
+}
 
 const handleResponse = response => {
   return response.json().then(text => {

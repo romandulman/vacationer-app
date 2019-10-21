@@ -64,9 +64,45 @@ exports.getSingleVacation = async (req, res) => {
 
 
 
-exports.deleteVacation = async (req, res) => {};
+exports.deleteVacation = async (req, res) => {
+    
+    await   model.Vacations.create({
+        description: req.body.description,
+        destination: req.body.destination,
+        image: `uploads/${req.file.originalname}`,
+        from: req.body.fromDate,
+        to: req.body.toDate,
+        price: req.body.price,
+        followerscount: 0,
+    })
 
-exports.editVacation = async (req, res) => {};
+};
+
+exports.editVacation = (req, res) => {
+
+    exports.newVacation = (req, res) => {
+        upload(req, res,   async err => {
+            if (err instanceof multer.MulterError) {
+                return res.status(500).json(err)
+            } else if (err) {
+                return res.status(500).json(err)
+            }
+
+            console.log(req.body.from)
+            await   model.Vacations.create({
+                description: req.body.description,
+                destination: req.body.destination,
+                image: `uploads/${req.file.originalname}`,
+                from: req.body.fromDate,
+                to: req.body.toDate,
+                price: req.body.price,
+                followerscount: 0,
+            })
+        })
+        // return
+    };
+
+};
 
 
 exports.followVacation = async (req, res) => {

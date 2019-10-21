@@ -23,9 +23,12 @@ class Vacations extends Component {
     }
     return (
       <div className={classes.rootDiv}>
+        <Container>
+          <Row>
         {vacations &&
           vacations.map(item => (
-            <VacItemComponent
+
+        <Col md={4}>    <VacItemComponent
               key={item.id}
               vacId={item.id}
               followerscount={item.followerscount}
@@ -34,8 +37,10 @@ class Vacations extends Component {
               image={item.image}
               datefrom={item.datefrom}
               dateto={item.dateto}
-            />
+        /></Col>
           ))}
+          </Row>
+        </Container>
       </div>
     );
   }

@@ -12,6 +12,10 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import Reports from "../admin.componets/AdminReports.component";
 import { makeVacEditable,openAddDialog } from "../admin.redux/Admin.actions";
 import AddEditVacDialod from "./AdminAddEditVac.container";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import VacItemComponent from "../../../../vacations.feature/vacations.components/VacationItem.component";
 
 class Admin extends Component {
   state = {
@@ -37,16 +41,36 @@ dispatch(openAddDialog())
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes,vacations } = this.props;
     const { showVacations, showReports } = this.state;
 
     return (
       <div>
         <div>
           <div>
-            {showVacations && <VacContainer />}
             {showReports && <Reports />}
             <AddEditVacDialod/>
+
+            <Container>
+              <Row>
+                {vacations &&
+                vacations.map(item => (
+
+                    <Col md={4}>    <VacItemComponent
+                        key={item.id}
+                        vacId={item.id}
+                        followerscount={item.followerscount}
+                        description={item.description}
+                        price={item.price}
+                        image={item.image}
+                        datefrom={item.datefrom}
+                        dateto={item.dateto}
+                    /></Col>
+                ))}
+              </Row>
+            </Container>
+
+
           </div>
           <BottomNavigation showLabels className={classes.bottomNav}>
             <BottomNavigationAction
@@ -73,7 +97,8 @@ dispatch(openAddDialog())
 
 const mapStateToProps = state => {
   return {
-    showReports: state.AdminReducer.showReports //with all data
+    showReports: state.AdminReducer.showReports, //with all data
+    vacations: state.AdminReducer.data
   };
 };
 
