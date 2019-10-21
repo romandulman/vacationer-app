@@ -93,8 +93,10 @@ export const AdminReducer = (state = initialState, action) => {
         loading: true
       };
     case adminConstants.SUCCESS_SUBMIT_NEW:
+      console.log(action.newVac)
       return {
         ...state,
+        vacations: [...state.vacations, action.newVac],
         loading: false
       };
     case adminConstants.FAILURE_SUBMIT_NEW:
@@ -109,10 +111,12 @@ export const AdminReducer = (state = initialState, action) => {
         ...state,
         loading: true
       };
+
     case adminConstants.SUCCESS_DELETE:
+      const data = [...state.vacations].filter(item => item.id !== parseInt(action.id));
       return {
         ...state,
-        vacations: action.updatedVacations,
+        vacations: data,
         loading: false
       };
     case adminConstants.FAILURE_DELETE:
@@ -120,7 +124,6 @@ export const AdminReducer = (state = initialState, action) => {
         ...state,
         loading: false
       };
-
 
 
     case adminConstants.FETCH_REPORTS:

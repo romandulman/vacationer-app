@@ -21,7 +21,6 @@ export const PostVacationToEdit = (vacId, newVacData) => {
 
 
 export const PostNewVacation =  newVacData => {
-  console.log(newVacData)
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
@@ -42,7 +41,8 @@ export  const DeleteVacation = vacId =>{
 const handleResponse = response => {
   return response.json().then(text => {
     const data = text;
-    if (!response.ok) {
+    console.log(data)
+    if (response.status !== 201) {
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
     }

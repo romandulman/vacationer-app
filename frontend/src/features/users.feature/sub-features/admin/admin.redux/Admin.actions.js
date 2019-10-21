@@ -48,14 +48,16 @@ export const submitEditVac = data => {
   };
 };
 
-export const submitNewVac = data => {
+export const submitNewVac = newVac => {
   return dispatch => {
     dispatch(reqSubmitNew());
-    PostNewVacation(data).then(
+    PostNewVacation(newVac).then(
         response => {
+          console.log("es",response)
           dispatch(sucSubmitNew(response));
         },
         error => {
+          console.log("error",error)
           dispatch(failSubmitNew(error));
         }
     );
@@ -66,9 +68,9 @@ export const deleteVacation = vacId => {
   return dispatch => {
     dispatch(reqDelete());
    DeleteVacation(vacId).then(
-        vacations => {
-          console.log(vacations)
-          dispatch(sucDelete(vacations));
+        response => {
+          console.log(response)
+          dispatch(sucDelete(response.deletedId));
         },
         error => {
           dispatch(failDelete(error));
@@ -127,9 +129,9 @@ const failSubmitEdit = error => ({
 const reqSubmitNew = () => ({
   type: adminConstants.REQUEST_SUBMIT_NEW
 });
-const sucSubmitNew = updatedVacations=> ({
+const sucSubmitNew = newVac=> ({
   type: adminConstants.SUCCESS_SUBMIT_NEW,
-  updatedVacations
+  newVac
 });
 const failSubmitNew = error => ({
   type: adminConstants.FAILURE_SUBMIT_NEW,
@@ -140,9 +142,9 @@ const failSubmitNew = error => ({
 const reqDelete = () => ({
   type: adminConstants.REQUEST_DELETE,
 });
-const sucDelete = updatedVacations => ({
+const sucDelete = id => ({
   type: adminConstants.SUCCESS_DELETE,
-  updatedVacations
+  id
 });
 const failDelete = error => ({
   type: adminConstants.FAILURE_DELETE,
