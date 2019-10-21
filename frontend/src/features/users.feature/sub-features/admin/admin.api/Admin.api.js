@@ -9,27 +9,30 @@ export const GetVacationToEdit = vacId => {
   return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
 };
 
-export const PostVacationToEdit = (vacId, newVacData) => {
+
+/*Update vacation action*/
+export const UpdateVacation = ( newVacData, vacId) => {
   const requestOptions = {
     method: "PUT",
     headers: authHeader(),
-    body: JSON.stringify({ newVacData })
+    body: newVacData
   };
-
   return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
 };
 
 
+/*Add new vacation action*/
 export const PostNewVacation =  newVacData => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
     body: newVacData
   };
-
   return fetch(`/vacations`, requestOptions).then(handleResponse);
 };
 
+
+/*Delete vacation action*/
 export  const DeleteVacation = vacId =>{
   const requestOptions = {
     method: "DELETE",

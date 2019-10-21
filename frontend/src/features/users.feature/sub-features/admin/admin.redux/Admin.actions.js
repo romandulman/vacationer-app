@@ -1,5 +1,5 @@
 import { adminConstants } from "./Admin.constants";
-import {GetVacationToEdit, PostVacationToEdit, PostNewVacation, DeleteVacation} from "../admin.api/Admin.api";
+import {GetVacationToEdit, UpdateVacation, PostNewVacation, DeleteVacation} from "../admin.api/Admin.api";
 import {GetAllVecations} from "../../../../vacations.feature/vacations.api/Vacations.api";
 
 
@@ -34,14 +34,16 @@ export const openEditVac = id => {
   };
 };
 
-export const submitEditVac = data => {
+export const submitUpdate = (updatedVac,vacId) => {
   return dispatch => {
     dispatch(reqSubmitEdit());
-    PostVacationToEdit(data).then(
+    console.log("idd",updatedVac,vacId)
+    UpdateVacation(updatedVac,vacId).then(
       response => {
         dispatch(sucSubmitEdit(response));
       },
       error => {
+        console.log("error",error);
         dispatch(failSubmitEdit(error));
       }
     );
@@ -53,7 +55,6 @@ export const submitNewVac = newVac => {
     dispatch(reqSubmitNew());
     PostNewVacation(newVac).then(
         response => {
-          console.log("es",response)
           dispatch(sucSubmitNew(response));
         },
         error => {
@@ -69,10 +70,10 @@ export const deleteVacation = vacId => {
     dispatch(reqDelete());
    DeleteVacation(vacId).then(
         response => {
-          console.log(response)
           dispatch(sucDelete(response.deletedId));
         },
         error => {
+          console.log("error",error);
           dispatch(failDelete(error));
         }
     );

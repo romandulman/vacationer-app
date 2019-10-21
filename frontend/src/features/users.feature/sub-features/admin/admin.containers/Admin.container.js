@@ -47,7 +47,7 @@ class Admin extends Component {
   };
 
   render() {
-    const { classes,vacations } = this.props;
+    const { classes,vacations,showDialog } = this.props;
     const { showVacations, showReports,showInfo } = this.state;
 
     return (
@@ -61,7 +61,7 @@ class Admin extends Component {
           </div>
           ) }
             {showReports && <Reports />}
-            <AddEditVacDialod/>
+            {showDialog.show && <AddEditVacDialod/>}
             { showVacations && ( <Container>
               <Row ><h4 className={classes.infoBox}>Edit Vacations</h4></Row>
               <Row>
@@ -74,8 +74,8 @@ class Admin extends Component {
                         description={item.description}
                         price={item.price}
                         image={item.image}
-                        datefrom={item.datefrom}
-                        dateto={item.dateto}
+                        dateFrom={item.from}
+                        dateTo={item.to}
                     /></Col>
                 ))}
               </Row>
@@ -107,9 +107,11 @@ class Admin extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state.AdminReducer.showDialog)
   return {
     showReports: state.AdminReducer.showReports, //with all data
-    vacations: state.AdminReducer.vacations
+    vacations: state.AdminReducer.vacations,
+    showDialog: state.AdminReducer.showDialog
   };
 };
 

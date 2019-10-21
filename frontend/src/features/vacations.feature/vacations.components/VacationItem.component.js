@@ -59,7 +59,7 @@ class VacationItem extends Component {
               gutterBottom
             >
               Dates:
-              <p>{this.props.datefrom} To {this.props.dateto}</p>
+              <p>{this.props.dateFrom} <strong>To</strong> {this.props.dateTo}</p>
             </Typography>
           </CardContent>
           <CardActions>

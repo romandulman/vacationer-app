@@ -35,8 +35,8 @@ class Vacations extends Component {
               description={item.description}
               price={item.price}
               image={item.image}
-              datefrom={item.datefrom}
-              dateto={item.dateto}
+              dateFrom={item.from}
+              dateTo={item.to}
         /></Col>
           ))}
           </Row>

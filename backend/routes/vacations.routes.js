@@ -8,7 +8,7 @@ vacationsRouter.get("/", userCheck, vacationsController.getAllVacations);
 vacationsRouter.get("/:id", adminCheck, vacationsController.getSingleVacation);
 vacationsRouter.post("/", adminCheck, vacationsController.newVacation);
 vacationsRouter.delete("/:id", adminCheck, vacationsController.deleteVacation);
-vacationsRouter.put("/:id", adminCheck, vacationsController.editVacation);
+vacationsRouter.put("/:id", adminCheck, vacationsController.updateVacation);
 
 vacationsRouter.post("/follow/:id", userCheck, vacationsController.followVacation);
 vacationsRouter.put("/follow/:id", userCheck, vacationsController.unfollowVacation);
