@@ -123,7 +123,7 @@ exports.updateVacation = (req, res) => {
 };
 
 
-/*Create and Follow operation controller*/
+/*Follow operation controller: create new record in the Follow table and update Vacations table */
 exports.followVacation = async (req, res) => {
     try {
         await model.Follow.create({
@@ -147,14 +147,24 @@ exports.followVacation = async (req, res) => {
 };
 
 
-/*Delete and UnFollow operation controller*/
+/*UnFollow operation controller: Delete from the  Follow table and update Vacations table */
 exports.unfollowVacation = async (req, res) => {
     try {
         await model.Follow.destroy({
             where: {
                 vacationid: req.params.id
             }
-        });
+        })
+            .then(updatedRecord=>{
+                model.Vacations.update({
+                        followerscount: req.body.followerscount +1
+                    },
+                    {
+                        where: {id: req.params.id},
+                        returning: true,
+                        plain: true
+                    });
+            })
         res.status(201).send({deletedId: req.params.id})
     } catch (e) {
         res.send(500)
