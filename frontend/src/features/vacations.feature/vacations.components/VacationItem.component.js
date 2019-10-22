@@ -60,7 +60,7 @@ class VacationItem extends Component {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        {!isEditable && (<Button onClick={()=>{dispatch(followVac(vacId))}} size="small">Follow</Button>)}
+                        {!isEditable && (<Button onClick={()=>{dispatch(followVac(vacId,followerscount))}} size="small">Follow</Button>)}
                         {isEditable && (
                             <div>
                                 <Button size="small" variant="contained" color="primary"

@@ -130,6 +130,15 @@ exports.followVacation = async (req, res) => {
           vacationid: req.params.id,
           userid: req.user.id
         }).then(createdRecord => {
+            model.Vacations.update({
+                followerscount: req.body.followerscount +1
+                },
+                {
+                    where: {id: req.params.id},
+                    returning: true,
+                    plain: true
+                });
+
             res.status(201).send({createdRecord})
         })
     } catch (e) {

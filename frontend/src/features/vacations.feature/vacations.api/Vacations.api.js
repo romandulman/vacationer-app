@@ -15,11 +15,11 @@ export const GetAllVecations = () =>{
 
 
 /*Follow  */
-export const Follow = vacationId =>{
+export const Follow = (vacationId,followerscount) =>{
     const requestOptions = {
         method: "POST",
-        headers: authHeader()
-        //body: JSON.stringify({ id:vacation.id})
+        headers: authHeader(),
+        body: JSON.stringify({ followerscount:followerscount})
     };
     return fetch(`/vacations/follow/${vacationId}`,requestOptions)
         .then(handleResponse)

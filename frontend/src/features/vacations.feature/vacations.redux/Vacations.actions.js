@@ -16,9 +16,9 @@ export const showAll = () => dispatch => {
 
 
 /*Follow vacation action*/
-export const followVac = id => dispatch => {
+export const followVac = (id,followerscount) => dispatch => {
   dispatch(reqFollow());
-  Follow(id).then(
+  Follow(id,followerscount).then(
       succsess => {
         dispatch(sucFollow(succsess));
       },
@@ -30,9 +30,9 @@ export const followVac = id => dispatch => {
 
 
 /*UnFollow vacation action*/
-export const unFollowVac = id => dispatch => {
+export const unFollowVac = (id,followerscount) => dispatch => {
   dispatch(reqFollow());
-  unFollow(id).then(
+  unFollow(id,followerscount).then(
       vacations => {
         dispatch(sucUnFollow(vacations));
       },
