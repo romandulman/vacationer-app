@@ -1,5 +1,4 @@
 import { adminConstants } from "./Admin.constants";
-import {VacConstants} from "../../../../vacations.feature/vacations.redux/Vacations.constants";
 
 const initialState = {
   showReports: false,
@@ -16,23 +15,25 @@ export const AdminReducer = (state = initialState, action) => {
         ...state,
         isEditable: true
       };
+
     case adminConstants.OPEN_DIALOG:
       return {
         ...state,
         showDialog: {show:true,opType:"Add"},
       };
+
     case adminConstants.CANCEL_DIALOG:
       return {
         ...state,
         showDialog: {show:false,opType:null}
       };
 
-
     case adminConstants.REQUEST_ALL:
       return {
         ...state,
         loading: true
       };
+
     case adminConstants.SUCCESS_ALL:
       return {
         ...state,
@@ -45,10 +46,6 @@ export const AdminReducer = (state = initialState, action) => {
         ...state,
         loading: false
       };
-
-
-
-
 
     case adminConstants.REQUEST_FETCH_FOR_EDIT:
       return {
@@ -68,44 +65,42 @@ export const AdminReducer = (state = initialState, action) => {
         ...state,
       };
 
-
-
     case adminConstants.REQUEST_SUBMIT_FOR_EDIT:
       return {
         ...state,
         loading: true
       };
+
     case adminConstants.SUCCESS_SUBMIT_FOR_EDIT:
       return {
         ...state,
         loading: false
       };
+
     case adminConstants.FAILURE_SUBMIT_FOR_EDIT:
       return {
         ...state,
         loading: false
       };
 
-
-
     case adminConstants.REQUEST_SUBMIT_NEW:
       return {
         ...state,
         loading: true
       };
+
     case adminConstants.SUCCESS_SUBMIT_NEW:
-      console.log(action.newVac)
       return {
         ...state,
         vacations: [...state.vacations, action.newVac],
         loading: false
       };
+
     case adminConstants.FAILURE_SUBMIT_NEW:
       return {
         ...state,
         loading: false
       };
-
 
     case adminConstants.REQUEST_DELETE:
       return {
@@ -120,12 +115,12 @@ export const AdminReducer = (state = initialState, action) => {
         vacations: data,
         loading: false
       };
+
     case adminConstants.FAILURE_DELETE:
       return {
         ...state,
         loading: false
       };
-
 
     case adminConstants.FETCH_REPORTS:
       return {

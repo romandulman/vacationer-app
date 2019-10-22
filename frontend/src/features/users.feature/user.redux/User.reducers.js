@@ -30,15 +30,16 @@ export const UserReducer = (state = initialState, action) => {
 
         case UserConstants.REGISTER_REQUEST:
             return {
-
+             loading: true
             };
         case UserConstants.REGISTER_SUCCESS:
             return {
 
+            loading:false
             };
         case UserConstants.REGISTER_FAILURE:
             return {
-
+            loading:false
             };
         case UserConstants.LOGOUT:
             return {};

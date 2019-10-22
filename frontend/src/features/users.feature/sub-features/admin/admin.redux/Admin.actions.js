@@ -7,14 +7,11 @@ import {GetAllVecations} from "../../../../vacations.feature/vacations.api/Vacat
 export const fecthAllVacations = () => dispatch => {
   GetAllVecations().then(
       vacations => {
-        //dispatch(_showAll("k"));
+        dispatch(reqGetAll());
         dispatch(sucGetAll(vacations));
-
-        // history.push("/vacations");
       },
       error => {
-        //dispatch(failure(error));
-        //dispatch(alertActions.error(error));
+        dispatch(failGetAll(error));
       }
   );
 };
@@ -93,8 +90,8 @@ const sucGetAll = vacations => ({
   type: adminConstants.SUCCESS_ALL, vacations
 });
 
-const failureAll = vacData => ({
-  type: adminConstants.FAILURE_ALL, vacData
+const failGetAll = error => ({
+  type: adminConstants.FAILURE_ALL, error
 });
 
 
@@ -163,7 +160,14 @@ export const openAddDialog = () => ({
 
 
 
-export const viewReports = data => ({
-  type: adminConstants.DELETE_VAC,
-  data
+export const reqReports = () => ({
+  type: adminConstants.REQUEST_FETCH_REPORTS, data
+});
+
+export const sucReports = data => ({
+  type: adminConstants.SUCCESS_FETCH_REPORTS, data
+});
+
+export const failReports = error => ({
+  type: adminConstants.FAILURE_FETCH_REPORTS, data
 });

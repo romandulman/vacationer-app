@@ -2,12 +2,13 @@ import React, {Component} from "react";
 import {withStyles} from "@material-ui/core";
 import {connect} from "react-redux";
 import {showAll} from "../vacations.redux/Vacations.actions";
+import {Styles} from "../vacations.assets/stylesheets/Vacations.stylesheet.js";
+import "../vacations.assets/stylesheets/Vacations.stylesheet.css";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import VacItemComponent from "../vacations.components/VacationItem.component";
-import {Styles} from "../vacations.assets/stylesheets/Vacations.stylesheet.js";
-import "../vacations.assets/stylesheets/Vacations.stylesheet.css";
+
 
 class Vacations extends Component {
     componentDidMount() {

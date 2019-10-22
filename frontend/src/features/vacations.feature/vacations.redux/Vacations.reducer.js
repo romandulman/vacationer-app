@@ -9,20 +9,20 @@ const initialState = {
 
 export const VacationsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case VacConstants.REQUEST_ALL:
+        case VacConstants.REQUEST_GET_ALL:
             return {
                 ...state,
                 loading: true
             };
 
-        case VacConstants.SUCCESS_ALL:
+        case VacConstants.SUCCESS_GET_ALL:
             return {
                 ...state,
                 vacData: action.vacData,
                 loading: false
             };
 
-        case VacConstants.FAILURE_ALL:
+        case VacConstants.FAILURE_GET_ALL:
             return {
                 ...state,
                 loading: false
@@ -32,7 +32,6 @@ export const VacationsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 followLoading: true,
-
             };
 
         case VacConstants.FOLLOW_SUCCESS:

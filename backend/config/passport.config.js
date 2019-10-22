@@ -5,8 +5,10 @@ const JWTstrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
 const jwtSecret = require("./jwt-config");
 const model = require("../models");
+const Sequelize = require('sequelize');
 
-/*
+const Op = Sequelize.Op;
+
 passport.use(
     'register',
     new LocalStrategy(
@@ -55,7 +57,6 @@ passport.use(
     ),
 );
 
-*/
 
 passport.use(
   "login",

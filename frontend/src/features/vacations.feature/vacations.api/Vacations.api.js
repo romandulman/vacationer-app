@@ -1,6 +1,5 @@
 import authHeader from '../../../helpers/authHeader'
 
-
 /*Get all vacations  */
 export const GetAllVecations = () =>{
     const requestOptions = {

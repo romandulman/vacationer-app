@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import Divider from '@material-ui/core/Divider';
 
 class UserLogin extends Component {
     state = {
@@ -56,6 +57,7 @@ class UserLogin extends Component {
 
     render() {
         const {classes, loggedIn, loading} = this.props;
+
         if (loggedIn) {
             this.props.history.push("/allvacations");
         }
@@ -93,23 +95,26 @@ class UserLogin extends Component {
                             />
                         </CardContent>
                         <CardActions>
-                            <Button component={Link} to="/" color="primary">
+                            <Button component={Link} to="/" variant="contained" size="small" color="secondary">
                                 Cancel
                             </Button>
-                            <Button type="submit" color="primary">
+                            <Button
+                                size="small"
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                disabled={loading}
+                            >
                                 Login
+                                {loading && <CircularProgress size={24} className={classes.buttonProgress}/>}
                             </Button>
                         </CardActions>
                     </form>
-                    <hr/>
+                    <Divider variant="middle"/>
                     <CardActions>
-                        <Button component={Link} to="/register" color="primary">
+                        <Button component={Link} to="/register" size="small" variant="contained" color="primary">
                             Register
                         </Button>
-                        <div>
-                        <br/>
-                        {loading && (<CircularProgress className={classes.progress} />)}
-                        </div>
                     </CardActions>
                 </Card>
             </div>

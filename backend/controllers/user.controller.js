@@ -5,7 +5,6 @@ const jwtSecret = require("../config/jwt-config");
 
 exports.userLogin = (req, res, next) => {
   passport.authenticate("login", (err, users, info) => {
-    console.log(req.body);
     if (err) {
       console.error(`error ${err}`);
     }
@@ -38,29 +37,24 @@ exports.userLogin = (req, res, next) => {
   })(req, res, next);
 };
 
-exports.userLogout = (req, res) => {
-  // model.User.findOne()
-};
 
-/*
+
 exports.userRegister = (req, res, next) => {
-  console.log(req.body)
   passport.authenticate('register', (err, user, info) => {
     if (err) {
-      console.error(err);
+    //  console.error(err);
     }
     if (info !== undefined) {
-      console.error(info.message);
+    //  console.error(info.message);
       res.status(403).send(info.message);
     } else {
-      // eslint-disable-next-line no-unused-vars
       req.logIn(user, error => {
         console.log(user);
         const data = {
-          first_name: req.body.newUser.first_name,
-          last_name: req.body.newUser.last_name,
-          email: "ss@gg.com",//req.body.newUser.email,
-          username: user.newUser.username,
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          email: req.body.email,
+          username: req.body.username,
         };
         console.log(data);
         model.User.findOne({
@@ -68,7 +62,7 @@ exports.userRegister = (req, res, next) => {
             username: data.username,
           },
         }).then(user => {
-          console.log(user);
+          //console.log(user);
           user
               .update({
                 first_name: data.first_name,
@@ -76,7 +70,7 @@ exports.userRegister = (req, res, next) => {
                 email: data.email,
               })
               .then(() => {
-                console.log('user created in db');
+               // console.log('user created in db');
                 res.status(200).send({ message: 'user created' });
               });
         });
@@ -84,4 +78,4 @@ exports.userRegister = (req, res, next) => {
     }
   })(req, res, next);
 };
-*/
+

@@ -14,6 +14,7 @@ export const UserLogin = (username, password) => {
         });
 };
 
+
 /*User Logout */
 export const UserLogout = () => {
     localStorage.removeItem("vacationerToken");
@@ -25,7 +26,7 @@ export const UserRegister = newUser => {
     const requestOptions = {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({newUser})
+        body: JSON.stringify({username: newUser.username,password:newUser.password,first_name:newUser.first_name,last_name:newUser.last_name,email:newUser.email})
     };
     return fetch("/users/register", requestOptions)
         .then(handleResponse)

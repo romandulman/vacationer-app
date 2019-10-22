@@ -1,5 +1,5 @@
 export const Styles = {
   rootDiv:{
-      marginTop: 100,
+      marginTop: 100
   }
 };
