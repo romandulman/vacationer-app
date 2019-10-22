@@ -3,7 +3,7 @@ import {withStyles} from "@material-ui/core/styles";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {Styles} from "../user.assets/stylesheets/User.stylesheet";
-import {userLogin} from "../user.redux/User.actions";
+import {userLogin,cancelLogin} from "../user.redux/User.actions";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -56,7 +56,7 @@ class UserLogin extends Component {
     };
 
     render() {
-        const {classes, loggedIn, loading} = this.props;
+        const {classes, loggedIn, loading,dispatch} = this.props;
 
         if (loggedIn) {
             this.props.history.push("/allvacations");
@@ -95,7 +95,7 @@ class UserLogin extends Component {
                             />
                         </CardContent>
                         <CardActions>
-                            <Button component={Link} to="/" variant="contained" size="small" color="secondary">
+                            <Button component={Link} to="/" onClick={()=>dispatch(cancelLogin())} variant="contained" size="small" color="secondary">
                                 Cancel
                             </Button>
                             <Button

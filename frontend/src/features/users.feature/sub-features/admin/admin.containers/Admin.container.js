@@ -1,21 +1,19 @@
 import React, { Component } from "react";
-import VacContainer from "../../../../vacations.feature/vacations.containers/Vacations.container";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import AssessmentIcon from "@material-ui/icons/Assessment";
 import { withStyles } from "@material-ui/core";
 import { Styles } from "../admin.assets/stylesheets/Admin.stylesheet";
+import { makeVacEditable,openAddDialog,followReports } from "../admin.redux/Admin.actions";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import VacItemComponent from "../../../../vacations.feature/vacations.components/VacationItem.component";
+import Reports from "../admin.componets/AdminReports.component";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import AssessmentIcon from "@material-ui/icons/Assessment";
 import EditIcon from "@material-ui/icons/Edit";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import Reports from "../admin.componets/AdminReports.component";
-import { makeVacEditable,openAddDialog } from "../admin.redux/Admin.actions";
-import AddEditVacDialod from "./AdminAddEditVac.container";
+import AddEditVacDialog from "./AdminAddEditVac.container";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import VacItemComponent from "../../../../vacations.feature/vacations.components/VacationItem.component";
 
 import {fecthAllVacations} from "../admin.redux/Admin.actions";
 
@@ -43,7 +41,9 @@ class Admin extends Component {
   };
 
   handleShowReportsSection = () => {
+    const { dispatch } = this.props;
     this.setState({ showVacations: false, showReports: true,  showInfo: false });
+    dispatch(followReports())
   };
 
   render() {
@@ -61,7 +61,7 @@ class Admin extends Component {
           </div>
           ) }
             {showReports && <Reports />}
-            {showDialog.show && <AddEditVacDialod/>}
+            {showDialog.show && <AddEditVacDialog/>}
             { showVacations && ( <Container>
               <Row ><h4 className={classes.infoBox}>Edit Vacations</h4></Row>
               <Row>

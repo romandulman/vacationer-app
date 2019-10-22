@@ -41,8 +41,8 @@ export  const DeleteVacation = vacId =>{
   return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
 };
 
-/*Get Vacations follow  data */
-export const GetFollowData = (vacId) => {
+/*Get Vacations follow data for the reports chart */
+export const GetFollowData = () => {
   const requestOptions = {
     method: "GET",
     headers: authHeader()

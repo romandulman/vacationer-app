@@ -61,3 +61,5 @@ const regRequest = () => ({type: UserConstants.REGISTER_REQUEST});
 const regSuccess = user => ({type: UserConstants.REGISTER_SUCCESS, user});
 const regFailure = error => ({type: UserConstants.REGISTER_FAILURE, error});
 
+export const cancelLogin = error => ({type: UserConstants.LOGIN_FAILURE, error});
+export const cancelRegister = error => ({type: UserConstants.LOGIN_FAILURE, error});

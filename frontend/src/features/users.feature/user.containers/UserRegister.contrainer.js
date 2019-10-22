@@ -3,7 +3,7 @@ import {withStyles} from "@material-ui/core/styles";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {Styles} from "../user.assets/stylesheets/User.stylesheet";
-import {namesCheck, userRegister} from "../user.redux/User.actions";
+import {namesCheck, userRegister,cancelRegister} from "../user.redux/User.actions";
 import TextField from "@material-ui/core/TextField";
 import CardActions from "@material-ui/core/CardActions";
 import Card from "@material-ui/core/Card";
@@ -61,7 +61,7 @@ class UserRegister extends Component {
     };
 
     render() {
-        const {classes, loading} = this.props;
+        const {classes, loading,dispatch} = this.props;
         return (
             <div>
                 <Card className={classes.RegisterCard}>
@@ -135,7 +135,7 @@ class UserRegister extends Component {
                             />
                         </CardContent>
                         <CardActions>
-                            <Button component={Link} to="/login" size="small" variant="contained" color="secondary">
+                            <Button component={Link} to="/login" onClick={()=>{dispatch(cancelRegister())}} size="small" variant="contained" color="secondary">
                                 Cancel
                             </Button>
                             <Button

@@ -10,9 +10,13 @@ export const Styles = {
         position: 'fixed',
         left: 0,
         bottom: 40,
-},
+    },
     navItem:{
         fontWeight: 1000,
         margin:'20px'
+    },
+    chartDiv:{
+        maxWidth: 900,
+        margin:'auto'
     }
 };

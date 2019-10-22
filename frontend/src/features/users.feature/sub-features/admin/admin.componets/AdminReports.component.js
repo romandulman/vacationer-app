@@ -1,42 +1,67 @@
 import React,{Component} from 'react'
-import { Chart } from 'react-charts'
+import CanvasJSReact from '../../../../../utils/canvasjs/canvasjs.react.js';
+import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core";
+import { Styles } from "../admin.assets/stylesheets/Admin.stylesheet";
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class Reports extends Component{
-state ={
+/*state ={
     data:[
         {
-            label: 'Series 1',
-            data: [[0, 1], [1, 2], [2, 4], [3, 2], [4, 7]]
+            series: 8,
+            datums: 3,
+            dataType: 'ordinal'
         },
-        {
-            label: 'Series 2',
-            data: [[0, 3], [1, 1], [2, 5], [3, 6], [4, 4]]
-        }
+
     ],
     axes:[
-        { primary: true, type: 'linear', position: 'bottom' },
-        { type: 'linear', position: 'left' }
+        { primary: true, type: 'ordinal', position: 'bottom' },
+        { position: 'left', type: 'linear', stacked: false }
+    ],
+    series:[
+       { type: 'bar'}
     ]
-}
-    render(){
-        return(
 
+}*/
+    render(){
+        const { classes,followData } = this.props;
+        const  data =  followData.vacations.map(item => ( { label: item.id,  y: item.followerscount  }));
+        const options = {
+            title: {
+                text: "Vacation Follow Report"
+            },
+            dataPointWidth:120,
+            data: [
+                {
+                    type: "column",
+                    dataPoints: [ data
+                   /*     { label: "Apple",  y: 10  },
+                        { label: "Orange", y: 15  },
+                        { label: "Banana", y: 25  },
+                        { label: "Mango",  y: 30  },
+                        { label: "Grape",  y: 28  }*/
+                    ]
+                }
+            ]
+        }
+        return(
             <div>
-                <h1>Reports</h1>
-                <div
-                    style={{
-                        width: '400px',
-                        height: '300px'
-                    }}
-                >
-                    <Chart data={this.state.data} axes={this.state.axes} />
+                <div className={classes.chartDiv}>
+                    <CanvasJSChart options = {options}/>
                 </div>
             </div>
-
-
-
         )
     }
 }
 
-export default Reports;
+const mapStateToProps = state => {
+    console.log(state.AdminReducer.followData)
+    return {
+        followData: state.AdminReducer.followData, //with all data
+        loading: state.AdminReducer.followData
+    };
+};
+
+export default connect(mapStateToProps)(withStyles(Styles)(Reports));
