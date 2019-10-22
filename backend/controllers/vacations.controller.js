@@ -11,6 +11,18 @@ var storage = multer.diskStorage({
 });
 var upload = multer({storage: storage}).single('imageFile');
 
+
+exports.getAllVacations = async (req, res) => {
+    try {
+        await model.Vacations.findAll({raw: true}).then(vacations => {
+            res.status(201).send(vacations);
+        });
+    } catch (e) {
+        res.status(500).send(e)
+    }
+};
+
+
 exports.newVacation = (req, res) => {
     upload(req, res, async err => {
         if (err instanceof multer.MulterError) {
@@ -40,16 +52,6 @@ exports.newVacation = (req, res) => {
         })
     });
 
-};
-
-
-exports.getAllVacations = async (req, res) => {
-    try {
-        await model.Vacations.findAll({raw: true}).then(vacations => {
-            res.status(201).send(vacations);
-        });
-    } catch (e) {
-    }
 };
 
 
@@ -122,3 +124,16 @@ exports.followVacation = async (req, res) => {
 exports.unfollowVacation = async (req, res) => {
 
 };
+
+exports.getFollowersData = async(req,res)=>{
+
+    try {
+        await model.Vacations.findAll({raw: true}).then(vacations => {
+         //   console.log(vacations)
+            res.status(201).send(vacations);
+        });
+    } catch (e) {
+        res.status(500).send(e)
+    }
+
+}

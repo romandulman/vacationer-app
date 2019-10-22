@@ -62,11 +62,12 @@ class AddEditVac extends Component {
     onFieldChange = e => {
         const {type, name, value, files} = e.target;
 
-        if (type === "text") {
+        if (type === "text" || type === "number" ) {
             this.setState({
                 [name]: value
             });
         }
+
         if (type === "file") {
             this.setState({
                 [name]: e.target.files[0]
@@ -171,7 +172,7 @@ class AddEditVac extends Component {
                         margin="dense"
                         label="Price"
                         name="price"
-                        type="text"
+                        type="number"
                         value={price}
                         onChange={e => {
                             this.onFieldChange(e);

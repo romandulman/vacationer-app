@@ -24,7 +24,8 @@ class VacationItem extends Component {
         return (
             <div className="vacation-item">
                 <Card className="item-card">
-                    <div><img width="300" src={`http://localhost:8080/${this.props.image}`}/>
+
+                    <div><img width="100%" src={`http://localhost:8081/${this.props.image}`}/>
                     </div>
                     <CardContent>
                         <Typography
@@ -32,28 +33,28 @@ class VacationItem extends Component {
                             color="textSecondary"
                             gutterBottom
                         >
-                            Followers {this.props.followerscount}
+                            <storng> Followers: </storng>{this.props.followerscount}
                         </Typography>
                         <Typography
                             className="item-description"
                             color="textSecondary"
                             gutterBottom
                         >
-                            Description: {this.props.description}
+                            <storng> Description:</storng> {this.props.description}
                         </Typography>
                         <Typography
                             className="item-price"
                             color="textSecondary"
                             gutterBottom
                         >
-                            Price: {this.props.price} $
+                            <storng> Price:</storng> {this.props.price} $
                         </Typography>
                         <Typography
                             className="item-dates"
                             color="textSecondary"
                             gutterBottom
                         >
-                            Dates:
+                            <storng> Dates:</storng>
                             <p>{this.props.dateFrom} <strong>To</strong> {this.props.dateTo}</p>
                         </Typography>
                     </CardContent>

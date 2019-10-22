@@ -81,9 +81,10 @@ export const deleteVacation = vacId => {
 export const followReports = ()=> {
   return dispatch => {
     dispatch(reqReports());
-    GetFollowData().then(
+    GetAllVecations().then(
         response => {
-          dispatch(sucReports(response.deletedId));
+          console.log(response)
+          dispatch(sucReports(response));
         },
         error => {
           console.log("error",error);
@@ -175,14 +176,14 @@ export const openAddDialog = () => ({
 
 
 
-export const reqReports = () => ({
+ const reqReports = () => ({
   type: adminConstants.REQUEST_FETCH_REPORTS
 });
 
-export const sucReports = data => ({
-  type: adminConstants.SUCCESS_FETCH_REPORTS, data
+ const sucReports = followersData => ({
+  type: adminConstants.SUCCESS_FETCH_REPORTS, followersData
 });
 
-export const failReports = error => ({
+const failReports = error => ({
   type: adminConstants.FAILURE_FETCH_REPORTS, error
 });

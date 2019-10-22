@@ -5,7 +5,8 @@ const initialState = {
   showVacEdit: false,
   isEditable:false,
   showDialog: {show:false,opType:null},
-  vacations:[]
+  vacations:[],
+  reportsData:[]
 };
 
 export const AdminReducer = (state = initialState, action) => {
@@ -122,9 +123,16 @@ export const AdminReducer = (state = initialState, action) => {
         loading: false
       };
 
-    case adminConstants.FETCH_REPORTS:
+    case adminConstants.REQUEST_FETCH_REPORTS:
       return {
-        showReports: action.data
+        ...state,
+        loading:true
+      };
+    case adminConstants.SUCCESS_FETCH_REPORTS:
+      console.log(action.followersData)
+      return {
+        ...state,
+        reportsData: action.followersData
       };
 
     default:

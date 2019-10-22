@@ -26,8 +26,9 @@ class Reports extends Component{
 
 }*/
     render(){
-        const { classes,followData } = this.props;
-        const  data =  followData.vacations.map(item => ( { label: item.id,  y: item.followerscount  }));
+        const { classes,followersData } = this.props;
+        const  data =  followersData.map(item => ( { label: `Vacation ID ${item.id}, Description:${item.description}`,  y: item.followerscount  }));
+console.log(data)
         const options = {
             title: {
                 text: "Vacation Follow Report"
@@ -36,20 +37,20 @@ class Reports extends Component{
             data: [
                 {
                     type: "column",
-                    dataPoints: [ data
+                    dataPoints:data
                    /*     { label: "Apple",  y: 10  },
                         { label: "Orange", y: 15  },
                         { label: "Banana", y: 25  },
                         { label: "Mango",  y: 30  },
                         { label: "Grape",  y: 28  }*/
-                    ]
+
                 }
             ]
         }
         return(
             <div>
                 <div className={classes.chartDiv}>
-                    <CanvasJSChart options = {options}/>
+                <CanvasJSChart options = {options}/>
                 </div>
             </div>
         )
@@ -57,10 +58,10 @@ class Reports extends Component{
 }
 
 const mapStateToProps = state => {
-    console.log(state.AdminReducer.followData)
+    console.log(state.AdminReducer.reportsData)
     return {
-        followData: state.AdminReducer.followData, //with all data
-        loading: state.AdminReducer.followData
+        followersData: state.AdminReducer. reportsData, //with all data
+        loading: state.AdminReducer.loading
     };
 };
 
