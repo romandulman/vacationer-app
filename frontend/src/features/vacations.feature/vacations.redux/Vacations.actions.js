@@ -2,6 +2,7 @@ import { VacConstants } from "./Vacations.constants";
 import { GetAllVecations,unFollow,Follow } from "../vacations.api/Vacations.api";
 import {UserConstants} from "../../users.feature/user.redux/User.constants";
 
+/*Show All vacation action*/
 export const showAll = () => dispatch => {
   GetAllVecations().then(
     vacations => {
@@ -15,6 +16,7 @@ export const showAll = () => dispatch => {
 };
 
 
+/*Follow vacation action*/
 export const followVac = id => dispatch => {
   dispatch(reqFollow());
   Follow().then(
@@ -28,6 +30,7 @@ export const followVac = id => dispatch => {
 };
 
 
+/*UnFollow vacation action*/
 export const unFollowVac = id => dispatch => {
   dispatch(reqFollow());
   GetAllVecations().then(
@@ -41,7 +44,7 @@ export const unFollowVac = id => dispatch => {
 };
 
 
-const reqGetAll = vacData => ({
+const reqGetAll = ()=> ({
   type: VacConstants.REQUEST_GET_ALL
 });
 
