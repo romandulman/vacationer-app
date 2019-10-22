@@ -41,6 +41,15 @@ export  const DeleteVacation = vacId =>{
   return fetch(`/vacations/${vacId}`, requestOptions).then(handleResponse);
 };
 
+/*Get Vacations follow  data */
+export const GetFollowData = (vacId) => {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+  return fetch(`/vacations/reports`, requestOptions).then(handleResponse);
+};
+
 
 /*Respone handler */
 const handleResponse = response => {

@@ -1,5 +1,5 @@
 import { adminConstants } from "./Admin.constants";
-import {GetVacationToEdit, UpdateVacation, PostNewVacation, DeleteVacation} from "../admin.api/Admin.api";
+import {GetVacationToEdit, UpdateVacation, PostNewVacation, DeleteVacation,GetFollowData} from "../admin.api/Admin.api";
 import {GetAllVecations} from "../../../../vacations.feature/vacations.api/Vacations.api";
 
 
@@ -77,6 +77,21 @@ export const deleteVacation = vacId => {
   };
 };
 
+
+export const followReports = ()=> {
+  return dispatch => {
+    dispatch(reqReports());
+    GetFollowData().then(
+        response => {
+          dispatch(sucReports(response.deletedId));
+        },
+        error => {
+          console.log("error",error);
+          dispatch(failReports(error));
+        }
+    );
+  };
+};
 
 export const makeVacEditable = () => ({
   type: adminConstants.MAKE_VAC_EDITABLE
@@ -161,7 +176,7 @@ export const openAddDialog = () => ({
 
 
 export const reqReports = () => ({
-  type: adminConstants.REQUEST_FETCH_REPORTS, data
+  type: adminConstants.REQUEST_FETCH_REPORTS
 });
 
 export const sucReports = data => ({

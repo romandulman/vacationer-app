@@ -27,5 +27,5 @@ export const adminConstants = {
   MAKE_VAC_EDITABLE: "MAKE_VAC_EDITABLE",
   OPEN_DIALOG: 'OPEN_DIALOG',
   CANCEL_DIALOG: "CANCEL_DIALOG",
-  
+
 };
