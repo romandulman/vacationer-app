@@ -164,8 +164,8 @@ exports.unfollowVacation = async (req, res) => {
                         returning: true,
                         plain: true
                     });
+                res.status(201).send({updatedRecord})
             })
-        res.status(201).send({deletedId: req.params.id})
     } catch (e) {
         res.send(500)
     }
