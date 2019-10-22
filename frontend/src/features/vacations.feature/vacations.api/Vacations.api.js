@@ -1,5 +1,8 @@
 import authHeader from '../../../helpers/authHeader'
 
+//// API Section ////
+
+
 /*Get all vacations  */
 export const GetAllVecations = () =>{
     const requestOptions = {
@@ -24,12 +27,12 @@ export const Follow = vacationId =>{
 
 
 /*Unfollow  */
-export const unFollow = vacation =>{
+export const unFollow = vacationId =>{
     const requestOptions = {
-        method: "PUT",
+        method: "DELETE",
         headers: authHeader()
     };
-    return fetch(`/vacations/follow/${vacation.id}`,requestOptions)
+    return fetch(`/vacations/follow/${vacationId}`,requestOptions)
         .then(handleResponse)
 };
 
