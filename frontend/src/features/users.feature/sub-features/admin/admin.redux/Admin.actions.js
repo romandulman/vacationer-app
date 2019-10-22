@@ -184,5 +184,5 @@ export const sucReports = data => ({
 });
 
 export const failReports = error => ({
-  type: adminConstants.FAILURE_FETCH_REPORTS, data
+  type: adminConstants.FAILURE_FETCH_REPORTS, error
 });
