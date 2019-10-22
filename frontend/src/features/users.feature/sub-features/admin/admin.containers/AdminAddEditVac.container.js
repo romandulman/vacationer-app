@@ -108,19 +108,8 @@ class AddEditVac extends Component {
         formData.append('price', price);
         formData.append('imageFile', imageFile);
 
-/*
-        const data = {
-            description: this.state.description,
-            destination: this.state.destination,
-            fromDate: this.state.fromDate,
-            toDate: this.state.toDate,
-            price: this.state.price,
-            imageFile: this.state.imageFile
-        };
-*/
-
         if (showDialog.opType === 'Edit') {
-         //   this.validator()
+
             dispatch(submitUpdate(formData,vacData.id));
           this.handleClose();
         }

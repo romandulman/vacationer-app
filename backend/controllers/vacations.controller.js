@@ -1,6 +1,7 @@
 const model = require("../models");
 var multer = require('multer');
 
+/*Multer config*/
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/')
@@ -12,6 +13,7 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage}).single('imageFile');
 
 
+// Get all vacations operation controller*/
 exports.getAllVacations = async (req, res) => {
     try {
         await model.Vacations.findAll({raw: true}).then(vacations => {
@@ -23,6 +25,7 @@ exports.getAllVacations = async (req, res) => {
 };
 
 
+/*Create new vacation operation controller*/
 exports.newVacation = (req, res) => {
     upload(req, res, async err => {
         if (err instanceof multer.MulterError) {
@@ -55,6 +58,7 @@ exports.newVacation = (req, res) => {
 };
 
 
+/*Get single vacation for edit controller*/
 exports.getSingleVacation = async (req, res) => {
     try {
         console.log(req.params.id);
@@ -70,6 +74,7 @@ exports.getSingleVacation = async (req, res) => {
 };
 
 
+/* Delete vacation operation controller*/
 exports.deleteVacation = async (req, res) => {
     try {
         await model.Vacations.destroy({
@@ -84,8 +89,9 @@ exports.deleteVacation = async (req, res) => {
 
 };
 
-exports.updateVacation = (req, res) => {
 
+/*Update Vacation operation controller*/
+exports.updateVacation = (req, res) => {
     upload(req, res, async err => {
         console.log(req.body.toDate, req.body.fromDate)
         if (err instanceof multer.MulterError) {
@@ -104,8 +110,8 @@ exports.updateVacation = (req, res) => {
                 },
                 {
                     where: {id: req.params.id},
-                    returning: true, // needed for affectedRows to be populated
-                    plain: true // makes sure that the returned instances are just plain objects
+                    returning: true,
+                    plain: true
                 });
 
             res.status(201)
@@ -113,27 +119,38 @@ exports.updateVacation = (req, res) => {
             res.status(500).send(e)
         }
     })
-    // return
+
 };
 
 
+/*Follow operation controller*/
 exports.followVacation = async (req, res) => {
-
+    try {
+        await model.Follow.create({
+          vacationid: req.params.id,
+          userid: req.user.id
+        }).then(createdRecord => {
+            res.status(201).send({createdRecord})
+        })
+    } catch (e) {
+        res.status(500).send(e)
+    }
 };
 
+
+/*UnFollow operation controller*/
 exports.unfollowVacation = async (req, res) => {
 
 };
 
-exports.getFollowersData = async(req,res)=>{
 
+/*Get all followers data from all vacations controller -> will send all the records*/
+exports.getFollowersData = async(req,res)=>{
     try {
         await model.Vacations.findAll({raw: true}).then(vacations => {
-         //   console.log(vacations)
             res.status(201).send(vacations);
         });
     } catch (e) {
         res.status(500).send(e)
     }
-
-}
+};

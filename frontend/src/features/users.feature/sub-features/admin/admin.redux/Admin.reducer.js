@@ -17,6 +17,12 @@ export const AdminReducer = (state = initialState, action) => {
         isEditable: true
       };
 
+    case adminConstants.UNMAKE_VAC_EDITABLE:
+      return {
+        ...state,
+        isEditable: false
+      };
+
     case adminConstants.OPEN_DIALOG:
       return {
         ...state,

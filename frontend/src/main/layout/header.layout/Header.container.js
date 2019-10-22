@@ -2,12 +2,12 @@ import React, {Component} from "react";
 import {withStyles} from "@material-ui/core/styles";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {UserLogoutAction} from "../../../features";
+import {UserLogoutAction,unMakeVacEditable} from "../../../features";
+import {styles} from "./assets/stylesheets/Header.stylesheet";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import logoIco from "./assets/images/departure.png";
-import {styles} from "./assets/stylesheets/Header.stylesheet";
 
 class Header extends Component {
 
@@ -33,7 +33,7 @@ class Header extends Component {
                         )}
                         {loggedIn && (
                             <div>
-                                <Button component={Link} to="/allvacations">Vacations</Button>
+                                <Button component={Link} to="/allvacations" onClick={()=>(dispatch(unMakeVacEditable()))}>Vacations</Button>
                                 {isAdmin && (
                                     <Button onClick={this.handleMenu} component={Link} to="/admin">Admin Panel</Button>
                                 )}

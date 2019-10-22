@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {withStyles} from "@material-ui/core/styles";
 import {openEditVac, deleteVacation} from "../../users.feature/sub-features/admin/admin.redux/Admin.actions";
+import {followVac,unFollowVac} from "../vacations.redux/Vacations.actions";
 import {connect} from "react-redux";
 import {Styles} from "../vacations.assets/stylesheets/Vacations.stylesheet";
 import "../vacations.assets/stylesheets/Vacations.stylesheet.css";
@@ -20,12 +21,12 @@ class VacationItem extends Component {
     };
 
     render() {
-        const {isEditable, dispatch} = this.props;
+        const {dispatch,isEditable,image,followerscount,description,price,dateTo,dateFrom,vacId } = this.props;
         return (
             <div className="vacation-item">
                 <Card className="item-card">
 
-                    <div><img width="100%" src={`http://localhost:8081/${this.props.image}`}/>
+                    <div><img width="100%" src={`http://localhost:8081/${image}`}/>
                     </div>
                     <CardContent>
                         <Typography
@@ -33,21 +34,21 @@ class VacationItem extends Component {
                             color="textSecondary"
                             gutterBottom
                         >
-                            <storng> Followers: </storng>{this.props.followerscount}
+                            <storng> Followers: </storng>{followerscount}
                         </Typography>
                         <Typography
                             className="item-description"
                             color="textSecondary"
                             gutterBottom
                         >
-                            <storng> Description:</storng> {this.props.description}
+                            <storng> Description:</storng> {description}
                         </Typography>
                         <Typography
                             className="item-price"
                             color="textSecondary"
                             gutterBottom
                         >
-                            <storng> Price:</storng> {this.props.price} $
+                            <storng> Price:</storng> {price} $
                         </Typography>
                         <Typography
                             className="item-dates"
@@ -55,17 +56,17 @@ class VacationItem extends Component {
                             gutterBottom
                         >
                             <storng> Dates:</storng>
-                            <p>{this.props.dateFrom} <strong>To</strong> {this.props.dateTo}</p>
+                            <p>{dateFrom} <strong>To</strong> {dateTo}</p>
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        {!isEditable && (<Button size="small">Follow</Button>)}
+                        {!isEditable && (<Button onClick={()=>{dispatch(followVac(vacId))}} size="small">Follow</Button>)}
                         {isEditable && (
                             <div>
                                 <Button size="small" variant="contained" color="primary"
-                                        onClick={() => dispatch(openEditVac(this.props.vacId))}>Edit</Button>
+                                        onClick={() => dispatch(openEditVac(vacId))}>Edit</Button>
                                 <Button size="small" variant="contained" color="secondary"
-                                        onClick={() => this.handleDeleteVac(this.props.vacId)}>Delete</Button>
+                                        onClick={() => this.handleDeleteVac(vacId)}>Delete</Button>
                             </div>
                         )}
                     </CardActions>

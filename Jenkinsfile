@@ -23,13 +23,6 @@ pipeline {
       }
     }
 
-  stage(''Unit & Integration Tests''){
-      /* React frontend unit tests and Node backend unit and integration tests */
-      steps {
-       sh 'cd guestbook-backend && npm install && npm test '
-       sh 'cd guestbook-frontend && npm install && npm test ' /* Unit + Integration tests */
-      }
-  }
 
   stage('Static Code Analysis'){
       /* SonarQube Analysis  */
@@ -71,7 +64,7 @@ pipeline {
               sh 'ssh -v ubuntu@$server'
               sh 'ssh ubuntu@$server sudo docker pull' + "$imageName" + ":$BUILD_NUMBER"
               sh 'ssh ubuntu@$server sudo docker rm vacationer --force '
-              sh 'ssh ubuntu@$server sudo docker run --detach  --name weatherly  --restart=always --env "VIRTUAL_HOST=vacationer.romandulman.com" "LETSENCRYPT_HOST=vacationer.romandulman.com"' + "$imageName" + ":$BUILD_NUMBER"
+              sh 'ssh ubuntu@$server sudo docker run --detach  --name vacationer  --restart=always --env "VIRTUAL_HOST=vacationer.romandulman.com" "LETSENCRYPT_HOST=vacationer.romandulman.com"' + "$imageName" + ":$BUILD_NUMBER"
           }
        }
    }

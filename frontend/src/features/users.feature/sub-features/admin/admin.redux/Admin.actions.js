@@ -97,6 +97,9 @@ export const followReports = ()=> {
 export const makeVacEditable = () => ({
   type: adminConstants.MAKE_VAC_EDITABLE
 });
+export const unMakeVacEditable = () => ({
+    type: adminConstants.UNMAKE_VAC_EDITABLE
+});
 
 const reqGetAll = () => ({
   type: adminConstants.REQUEST_ALL

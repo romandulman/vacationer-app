@@ -1,6 +1,5 @@
 import { VacConstants } from "./Vacations.constants";
 import { GetAllVecations,unFollow,Follow } from "../vacations.api/Vacations.api";
-import {UserConstants} from "../../users.feature/user.redux/User.constants";
 
 /*Show All vacation action*/
 export const showAll = () => dispatch => {
@@ -19,7 +18,7 @@ export const showAll = () => dispatch => {
 /*Follow vacation action*/
 export const followVac = id => dispatch => {
   dispatch(reqFollow());
-  Follow().then(
+  Follow(id).then(
       succsess => {
         dispatch(sucFollow(succsess));
       },
@@ -33,7 +32,7 @@ export const followVac = id => dispatch => {
 /*UnFollow vacation action*/
 export const unFollowVac = id => dispatch => {
   dispatch(reqFollow());
-  GetAllVecations().then(
+  unFollow(id).then(
       vacations => {
         dispatch(sucUnFollow(vacations));
       },
@@ -58,15 +57,15 @@ const failGetAll = vacData => ({
 
 
 const reqFollow = () =>{
-  return { type: UserConstants.FOLLOW_REQUEST};
+  return { type: VacConstants.FOLLOW_REQUEST};
 };
 const sucFollow = updatedVacations => {
-  return { type: UserConstants.FOLLOW_SUCCESS, updatedVacations };
+  return { type: VacConstants.FOLLOW_SUCCESS, updatedVacations };
 };
 const sucUnFollow = updatedVacations => {
-  return { type: UserConstants.UNFOLLOW_SUCCESS, updatedVacations };
+  return { type: VacConstants.UNFOLLOW_SUCCESS, updatedVacations };
 };
 const failFollow = () => {
-  return { type: UserConstants.FOLLOW_FAILURE };
+  return { type: VacConstants.FOLLOW_FAILURE };
 };
 

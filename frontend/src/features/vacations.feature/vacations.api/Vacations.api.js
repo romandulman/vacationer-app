@@ -12,13 +12,13 @@ export const GetAllVecations = () =>{
 
 
 /*Follow  */
-export const Follow = vacation =>{
+export const Follow = vacationId =>{
     const requestOptions = {
         method: "POST",
         headers: authHeader()
         //body: JSON.stringify({ id:vacation.id})
     };
-    return fetch(`/users/follow/${vacation.id}`,requestOptions)
+    return fetch(`/vacations/follow/${vacationId}`,requestOptions)
         .then(handleResponse)
 };
 
@@ -29,7 +29,7 @@ export const unFollow = vacation =>{
         method: "PUT",
         headers: authHeader()
     };
-    return fetch(`/users/follow/${vacation.id}`,requestOptions)
+    return fetch(`/vacations/follow/${vacation.id}`,requestOptions)
         .then(handleResponse)
 };
 

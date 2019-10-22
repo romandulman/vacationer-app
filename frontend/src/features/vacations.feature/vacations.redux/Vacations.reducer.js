@@ -37,14 +37,12 @@ export const VacationsReducer = (state = initialState, action) => {
         case VacConstants.FOLLOW_SUCCESS:
             return {
                 ...state,
-                vacData: action.vacData,
                 followLoading: false
             };
 
         case VacConstants.UNFOLLOW_SUCCESS:
             return {
                 ...state,
-                vacData: action.vacData,
                 followLoading: false
             };
 
