@@ -42,6 +42,7 @@ exports.userLogout = (req, res) => {
   // model.User.findOne()
 };
 
+/*
 exports.userRegister = (req, res, next) => {
   console.log(req.body)
   passport.authenticate('register', (err, user, info) => {
@@ -83,3 +84,4 @@ exports.userRegister = (req, res, next) => {
     }
   })(req, res, next);
 };
+*/
