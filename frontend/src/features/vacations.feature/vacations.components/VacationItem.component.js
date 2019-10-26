@@ -26,7 +26,7 @@ class VacationItem extends Component {
             <div className="vacation-item">
                 <Card className="item-card">
 
-                    <div><img width="100%" src={`http://localhost:8081/${image}`}/>
+                    <div><img width="100%" src={`http://vacationer.romandulman.com/${image}`}/>
                     </div>
                     <CardContent>
                         <Typography

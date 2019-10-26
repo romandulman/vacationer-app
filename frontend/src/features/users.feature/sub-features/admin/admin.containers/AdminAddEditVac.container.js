@@ -198,7 +198,7 @@ class AddEditVac extends Component {
                     </MuiPickersUtilsProvider>
                     );
                     <label>Image:</label>
-                    {showDialog.opType === 'Edit' && (<img src={`http://localhost:8080/uploads/${image}`}/>)}
+                    {showDialog.opType === 'Edit' && (<img src={`http://vacationer.romandulman.com/uploads/${image}`}/>)}
                     <input type="file" name="imageFile" onChange={e => {
                         this.onFieldChange(e)
                     }}/>
