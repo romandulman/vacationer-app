@@ -37,7 +37,7 @@ class Header extends Component {
                                 {isAdmin && (
                                     <Button onClick={this.handleMenu} component={Link} to="/admin">Admin Panel</Button>
                                 )}
-                                <Button color="primary" onClick={() => {dispatch(UserLogoutAction());}}>Logout</Button>
+                                <Button color="primary" component={Link} to="/login" onClick={() => {dispatch(UserLogoutAction());}}>Logout</Button>
                             </div>
                         )}
                         {user &&  <div>Hi, {user}</div>}
