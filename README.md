@@ -15,4 +15,6 @@
 
 * Frontend:
   * React.js
-  * State management with  Redux + Thunk   
+  * State management with  Redux + Thunk  
+  * Material Design
+
