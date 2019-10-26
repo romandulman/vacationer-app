@@ -63,7 +63,8 @@ pipeline {
               sh 'ssh -o StrictHostKeyChecking=no ubuntu@${server} uptime'
               sh 'ssh -v ubuntu@$server'
               sh 'ssh ubuntu@$server sudo docker pull' +" " + "$imageName" + ":$BUILD_NUMBER"
-              sh 'ssh ubuntu@$server sudo docker run --detach  --name vacationer  --restart=always --env "VIRTUAL_HOST=vacationer.romandulman.com" "LETSENCRYPT_HOST=vacationer.romandulman.com"' + "$imageName" + ":$BUILD_NUMBER"
+              sh 'ssh ubuntu@$server sudo docker rm vacationer --force '
+              sh 'ssh ubuntu@$server sudo docker run --detach  --name vacationer  --restart=always --env "VIRTUAL_HOST=vacationer.romandulman.com"  +" " + "$imageName" + ":$BUILD_NUMBER"
           }
        }
    }
