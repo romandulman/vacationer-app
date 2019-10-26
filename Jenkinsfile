@@ -39,7 +39,7 @@ pipeline {
   stage('Build Frontend'){
       /* Build React Frontend  */
       steps{
-           sh 'npm run build'
+           sh 'cd frontend && npm run build'
       }
   }
 
