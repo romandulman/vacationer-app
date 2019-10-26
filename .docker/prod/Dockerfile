@@ -8,7 +8,7 @@ RUN npm install
 
 COPY ./backend .
 
-COPY ./build ./public
+COPY ./frontend/build ./public
 
 EXPOSE 8081
 
