@@ -38,9 +38,9 @@ app.use(passport.initialize());
 
 app.use("/users", router.usersRouter);
 
-app.get('/*',(req,res)=>{
+/*app.get('/!*',(req,res)=>{
     res.sendFile(path.join(_dirname, 'public', 'index.html'))
-});
+});*/
 
 app.use(
   "/vacations",
