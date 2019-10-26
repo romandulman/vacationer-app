@@ -1,5 +1,3 @@
-### in Development ....
-
 ## Vacationer 
 
 ### Vacations information application

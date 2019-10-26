@@ -24,7 +24,7 @@ class Header extends Component {
                                 height="40"
                                 className={classes.Desklogo}
                             />
-                            <span className={classes.logoText}>Vecationer</span>
+                            <span className={classes.logoText}>Vacationer</span>
                         </div>
                         {!loggedIn && (
                             <Button component={Link} to="/login">

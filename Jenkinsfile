@@ -24,8 +24,8 @@ pipeline {
     }
 
 
-  stage('Static Code Analysis'){
-      /* SonarQube Analysis  */
+/*  stage('Static Code Analysis'){
+       SonarQube Analysis
       steps {
             withSonarQubeEnv('Host-2-SonarQube') {
                 sh "${scannerHome}/bin/sonar-scanner"
@@ -34,7 +34,7 @@ pipeline {
             waitForQualityGate abortPipeline: true
             }
       }
-  }
+  }*/
 
   stage('Build Frontend'){
       /* Build React Frontend  */
