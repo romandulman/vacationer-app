@@ -2,12 +2,13 @@ import { adminConstants } from "./Admin.constants";
 import {GetVacationToEdit, UpdateVacation, PostNewVacation, DeleteVacation,GetFollowData} from "../admin.api/Admin.api";
 import {GetAllVecations} from "../../../../vacations.feature/vacations.api/Vacations.api";
 
+/*///  Admin Actions ///*/
 
-
+/* Fetch all vacations Action*/
 export const fecthAllVacations = () => dispatch => {
-  GetAllVecations().then(
+    dispatch(reqGetAll());
+    GetAllVecations().then(
       vacations => {
-        dispatch(reqGetAll());
         dispatch(sucGetAll(vacations));
       },
       error => {
@@ -16,10 +17,11 @@ export const fecthAllVacations = () => dispatch => {
   );
 };
 
+
+/* Fetch Vacation to edit and open Vacation edit modal*/
 export const openEditVac = id => {
   return dispatch => {
     dispatch(reqFetchEdit());
-    console.log(id)
     GetVacationToEdit(id).then(
       vacation => {
         dispatch(sucFetchEdit(vacation));
@@ -31,22 +33,23 @@ export const openEditVac = id => {
   };
 };
 
+
+/*  Submit updated Vacation Action */
 export const submitUpdate = (updatedVac,vacId) => {
   return dispatch => {
     dispatch(reqSubmitEdit());
-    console.log("idd",updatedVac,vacId)
     UpdateVacation(updatedVac,vacId).then(
       response => {
         dispatch(sucSubmitEdit(response));
       },
       error => {
-        console.log("error",error);
         dispatch(failSubmitEdit(error));
       }
     );
   };
 };
 
+/*  Submit New Vacation Action */
 export const submitNewVac = newVac => {
   return dispatch => {
     dispatch(reqSubmitNew());
@@ -62,6 +65,8 @@ export const submitNewVac = newVac => {
   };
 };
 
+
+/*  Delete Vacation Action */
 export const deleteVacation = vacId => {
   return dispatch => {
     dispatch(reqDelete());
@@ -78,6 +83,7 @@ export const deleteVacation = vacId => {
 };
 
 
+/*  Fetach  Follow Reports Action */
 export const followReports = ()=> {
   return dispatch => {
     dispatch(reqReports());
@@ -93,6 +99,8 @@ export const followReports = ()=> {
     );
   };
 };
+
+
 
 export const makeVacEditable = () => ({
   type: adminConstants.MAKE_VAC_EDITABLE

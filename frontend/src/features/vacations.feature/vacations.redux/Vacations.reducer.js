@@ -2,6 +2,7 @@ import {VacConstants} from "./Vacations.constants";
 
 const initialState = {
     vacData: [],
+    followsData:[],
     loading: false,
     followLoading: false,
     error: null
@@ -19,6 +20,7 @@ export const VacationsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 vacData: action.vacData,
+                followsData: action.follows,
                 loading: false
             };
 

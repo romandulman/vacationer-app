@@ -1,6 +1,7 @@
 import {UserConstants} from "./User.constants";
 import {UserLogin, UserLogout, CheckUsernames, UserRegister} from "../user.api/User.api";
 
+/*///  User Actions ///*/
 
 /*User Login action*/
 export const userLogin = (username, password) => {
@@ -15,21 +16,6 @@ export const userLogin = (username, password) => {
             }
         );
     };
-};
-
-
-/*Check if username not taken action*/
-export const namesCheck = (username) => {
-    CheckUsernames(username).then(
-        checked => {
-            if (username === checked) {
-                alert("The Username " + checked + " is take, try another ")
-            }
-        },
-        error => {
-                console.log(error)
-        }
-    );
 };
 
 
@@ -61,5 +47,5 @@ const regRequest = () => ({type: UserConstants.REGISTER_REQUEST});
 const regSuccess = user => ({type: UserConstants.REGISTER_SUCCESS, user});
 const regFailure = error => ({type: UserConstants.REGISTER_FAILURE, error});
 
-export const cancelLogin = error => ({type: UserConstants.LOGIN_FAILURE, error});
-export const cancelRegister = error => ({type: UserConstants.LOGIN_FAILURE, error});
+export const cancelLogin = () => ({type: UserConstants.CANCEL_LOGIN});
+export const cancelRegister = error => ({type: UserConstants.CANCEL_REGISTER, error});

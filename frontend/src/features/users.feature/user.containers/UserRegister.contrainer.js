@@ -3,7 +3,8 @@ import {withStyles} from "@material-ui/core/styles";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {Styles} from "../user.assets/stylesheets/User.stylesheet";
-import {namesCheck, userRegister,cancelRegister} from "../user.redux/User.actions";
+import {userRegister,cancelRegister} from "../user.redux/User.actions";
+import {CheckUsernames} from "../user.api/User.api";
 import TextField from "@material-ui/core/TextField";
 import CardActions from "@material-ui/core/CardActions";
 import Card from "@material-ui/core/Card";
@@ -20,7 +21,8 @@ class UserRegister extends Component {
         firstname: "",
         lastname: "",
         email: "",
-        submitted: false
+        submitted: false,
+        usernameTaken: false
     };
 
     handleRegister = e => {
@@ -44,7 +46,13 @@ class UserRegister extends Component {
             email: email
         };
 
-        dispatch(userRegister(newUser))
+        CheckUsernames(username)
+            .then(name=>{
+                if(name) {
+                    return alert("The Username " + username + "is taken, please try another one")
+                }
+                dispatch(userRegister(newUser));
+            });
     };
 
     onFieldChange = e => {
@@ -61,7 +69,10 @@ class UserRegister extends Component {
     };
 
     render() {
-        const {classes, loading,dispatch} = this.props;
+        const {classes, loading,dispatch,registered} = this.props;
+        if (registered) {
+            this.props.history.push("/login");
+        }
         return (
             <div>
                 <Card className={classes.RegisterCard}>
@@ -160,6 +171,7 @@ class UserRegister extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.UserReducer.loading,
+        registered: state.UserReducer.registered,
     };
 };
 

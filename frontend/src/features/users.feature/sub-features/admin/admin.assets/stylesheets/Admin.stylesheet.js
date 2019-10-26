@@ -7,9 +7,10 @@ export const Styles = {
     },
     bottomNav: {
         maxWidth: 500,
+        height:100,
         position: 'fixed',
         left: 0,
-        bottom: 40,
+        bottom: 0,
     },
     navItem:{
         fontWeight: 1000,

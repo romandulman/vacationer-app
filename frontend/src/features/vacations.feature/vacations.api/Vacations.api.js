@@ -14,7 +14,18 @@ export const GetAllVecations = () =>{
 };
 
 
-/*Follow  */
+/*Get all Follows data  */
+export const GetAllFollows = () =>{
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch("/vacations/follow",requestOptions)
+        .then(handleResponse)
+};
+
+
+/* Follow  */
 export const Follow = (vacationId,followerscount) =>{
     const requestOptions = {
         method: "POST",
@@ -37,7 +48,7 @@ export const unFollow = vacationId =>{
 };
 
 
-/*Respone handler */
+/*Response handler */
 const handleResponse = response =>{
     return response.json().then(text => {
         const data = text;

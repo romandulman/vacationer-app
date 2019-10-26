@@ -56,12 +56,10 @@ class UserLogin extends Component {
     };
 
     render() {
-        const {classes, loggedIn, loading,dispatch} = this.props;
-
+        const {classes, loggedIn, loading,dispatch,errorMessege} = this.props;
         if (loggedIn) {
             this.props.history.push("/allvacations");
         }
-
         return (
             <div>
                 <Card className={classes.LoginCard}>
@@ -93,6 +91,7 @@ class UserLogin extends Component {
                                 }}
                                 fullWidth
                             />
+                         {errorMessege &&   <p>Wrong Credentials! </p>}
                         </CardContent>
                         <CardActions>
                             <Button component={Link} to="/" onClick={()=>dispatch(cancelLogin())} variant="contained" size="small" color="secondary">
@@ -116,6 +115,13 @@ class UserLogin extends Component {
                             Register
                         </Button>
                     </CardActions>
+                    <Divider variant="middle"/>
+
+                    <CardActions>
+                        <p>Admin Username: <strong>roman</strong></p>
+                        <p> Password:<strong> secret</strong></p>
+                    </CardActions>
+
                 </Card>
             </div>
         );
@@ -125,7 +131,8 @@ class UserLogin extends Component {
 const mapStateToProps = state => {
     return {
         loggedIn: state.UserReducer.loggedIn,
-        loading: state.UserReducer.loading
+        loading: state.UserReducer.loading,
+        errorMessege: state.UserReducer.errorMessege
     };
 };
 

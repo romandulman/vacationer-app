@@ -17,11 +17,22 @@ class Vacations extends Component {
     }
 
     render() {
-        const {vacations} = this.props;
-        const {classes, loggedIn} = this.props;
+
+        const {vacations,follows,classes,loggedIn} = this.props;
         if (!loggedIn) {
             this.props.history.push("/login");
         }
+
+const isFollowed = (id)=>{
+    const found = function(element) {
+        return element.vacationid === id
+    }
+return follows.some(found)
+}
+
+      console.log(isFollowed(119))
+
+
         return (
             <div className={classes.rootDiv}>
                 <Container>
@@ -37,6 +48,7 @@ class Vacations extends Component {
                                 image={item.image}
                                 dateFrom={item.from}
                                 dateTo={item.to}
+                                isFollowed={isFollowed(item.id)}
                             /></Col>
                         ))}
                     </Row>
@@ -47,9 +59,11 @@ class Vacations extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state.VacationsReducer.followsData)
     return {
         loggedIn: state.UserReducer.loggedIn,
-        vacations: state.VacationsReducer.vacData
+        vacations: state.VacationsReducer.vacData,
+        follows: state.VacationsReducer.followsData
     };
 }
 

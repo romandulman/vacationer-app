@@ -3,6 +3,9 @@ const passport = require("passport");
 const model = require("../models");
 const jwtSecret = require("../config/jwt-config");
 
+/// Users Controllers ///
+
+/* User Login */
 exports.userLogin = (req, res, next) => {
   passport.authenticate("login", (err, users, info) => {
     if (err) {
@@ -38,18 +41,16 @@ exports.userLogin = (req, res, next) => {
 };
 
 
-
+/* User Register Controller */
 exports.userRegister = (req, res, next) => {
   passport.authenticate('register', (err, user, info) => {
     if (err) {
-    //  console.error(err);
+     console.error(err);
     }
     if (info !== undefined) {
-    //  console.error(info.message);
       res.status(403).send(info.message);
     } else {
       req.logIn(user, error => {
-        console.log(user);
         const data = {
           first_name: req.body.first_name,
           last_name: req.body.last_name,
@@ -62,7 +63,6 @@ exports.userRegister = (req, res, next) => {
             username: data.username,
           },
         }).then(user => {
-          //console.log(user);
           user
               .update({
                 first_name: data.first_name,
@@ -70,12 +70,28 @@ exports.userRegister = (req, res, next) => {
                 email: data.email,
               })
               .then(() => {
-               // console.log('user created in db');
                 res.status(200).send({ message: 'user created' });
               });
         });
       });
     }
   })(req, res, next);
+};
+
+
+/* Check Username availability */
+exports.nameCheck = async (req,res)=>{
+  model.User.findOne({
+    where: {
+      username: req.params.username
+    }
+  }).then(user => {
+    console.log("user");
+    if(user!==null){
+    return   res.status(302).send({found:true})
+    }
+    res.status(201).send({found:false})
+
+  })
 };
 

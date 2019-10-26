@@ -1,5 +1,7 @@
 
 /*User Login */
+import authHeader from "../../../helpers/authHeader-Admin";
+
 export const UserLogin = (username, password) => {
     const requestOptions = {
         method: "POST",
@@ -37,27 +39,21 @@ export const UserRegister = newUser => {
 };
 
 
-/*User Check name */
+/*Username availability Check  */
 export const CheckUsernames = username => {
-    return new Promise(resolve => {
-        //test promise
-        resolve("ron");
-    });
+    const requestOptions = {
+        method: "GET",
+    };
+    return fetch(`/users/register/checkname/${username}`, requestOptions)
+        .then( user=>{
+            console.log(user)
+            if (user.status===302){
+                return true
 
-    //alert(username)
-    /*
-      const requestOptions = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username })
-      };
-      return fetch("/auth/regcheck", requestOptions)
-          .then(handleResponse)
-          .then(user => {
-              return user;
-
-          });
-  */
+            }
+            return false
+        },
+    );
 };
 
 

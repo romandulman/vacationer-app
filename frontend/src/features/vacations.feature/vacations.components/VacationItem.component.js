@@ -21,7 +21,7 @@ class VacationItem extends Component {
     };
 
     render() {
-        const {dispatch,isEditable,image,followerscount,description,price,dateTo,dateFrom,vacId } = this.props;
+        const {dispatch, isEditable, image, followerscount, description, price, dateTo, dateFrom, vacId, isFollowed} = this.props;
         return (
             <div className="vacation-item">
                 <Card className="item-card">
@@ -34,21 +34,24 @@ class VacationItem extends Component {
                             color="textSecondary"
                             gutterBottom
                         >
-                            <storng> Followers: </storng>{followerscount}
+                            <storng> Followers:</storng>
+                            {followerscount}
                         </Typography>
                         <Typography
                             className="item-description"
                             color="textSecondary"
                             gutterBottom
                         >
-                            <storng> Description:</storng> {description}
+                            <storng> Description:</storng>
+                            {description}
                         </Typography>
                         <Typography
                             className="item-price"
                             color="textSecondary"
                             gutterBottom
                         >
-                            <storng> Price:</storng> {price} $
+                            <storng> Price:</storng>
+                            {price} $
                         </Typography>
                         <Typography
                             className="item-dates"
@@ -60,7 +63,15 @@ class VacationItem extends Component {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        {!isEditable && (<Button onClick={()=>{dispatch(followVac(vacId,followerscount))}} size="small">Follow</Button>)}
+                        {!isEditable && (<div>
+                            {!isFollowed && <Button onClick={() => {
+                                dispatch(followVac(vacId, followerscount))
+                            }} size="small">Follow</Button>}
+                            {isFollowed && <Button onClick={() => {
+                                dispatch(unFollowVac(vacId, followerscount))
+                            }} size="small">Unfollow</Button>}
+
+                        </div>)}
                         {isEditable && (
                             <div>
                                 <Button size="small" variant="contained" color="primary"

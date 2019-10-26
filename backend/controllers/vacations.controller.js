@@ -93,7 +93,6 @@ exports.deleteVacation = async (req, res) => {
 /*Update Vacation operation controller*/
 exports.updateVacation = (req, res) => {
     upload(req, res, async err => {
-        console.log(req.body.toDate, req.body.fromDate)
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err)
         } else if (err) {
@@ -122,6 +121,13 @@ exports.updateVacation = (req, res) => {
 
 };
 
+/*Get all follow data from Follows table for the Specific User that logged in -> will send his all follows*/
+exports.getFollowersData = async (req,res)=>{
+        await model.Follow.findAll({ where: {userid: req.user.id}}
+        ).then(follows => {
+            res.status(201).send(follows);
+        });
+};
 
 /*Follow operation controller: create new record in the Follow table and update Vacations table */
 exports.followVacation = async (req, res) => {
@@ -147,7 +153,7 @@ exports.followVacation = async (req, res) => {
 };
 
 
-/*UnFollow operation controller: Delete from the  Follow table and update Vacations table */
+/*UnFollow operation controller: Delete from the Follow table and update Vacations table */
 exports.unfollowVacation = async (req, res) => {
     try {
         await model.Follow.destroy({
@@ -157,7 +163,7 @@ exports.unfollowVacation = async (req, res) => {
         })
             .then(updatedRecord=>{
                 model.Vacations.update({
-                        followerscount: req.body.followerscount +1
+                        followerscount: req.body.followerscount -1
                     },
                     {
                         where: {id: req.params.id},
@@ -172,8 +178,8 @@ exports.unfollowVacation = async (req, res) => {
 };
 
 
-/*Get all followers data from all vacations controller -> will send all the records*/
-exports.getFollowersData = async(req,res)=>{
+/*Get all followers data from all vacations -> will send all the records*/
+exports.getFollowersDataCountData = async(req,res)=>{
     try {
         await model.Vacations.findAll({raw: true}).then(vacations => {
             res.status(201).send(vacations);
@@ -182,3 +188,5 @@ exports.getFollowersData = async(req,res)=>{
         res.status(500).send(e)
     }
 };
+
+
